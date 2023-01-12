@@ -33,7 +33,7 @@ Next, verify you are running the desired version:
 rvm list
 ```
 
-Ensure you have `mimemagic` installed on your environment, version 0.3.10.
+Depending on your environment, you may need to ensure you have `mimemagic` installed on your environment, version 0.3.10.
 
 Install the dependencies:
 
