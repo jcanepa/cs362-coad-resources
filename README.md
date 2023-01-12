@@ -18,6 +18,23 @@ git clone git@github.com:YOURFORK/cs362-coad-resources.git
 
 This is a Rails application that uses SQLite in development and PostgreSQL in production.
 
+Prerequisites:
+Install a Ruby version manager like [rbenv]() or [rvm](). Use these utilities to install the appopriate version of Ruby as specified in the Gemfile. Ruby version 2.7.2, Rails version 5.2.4.6.
+
+Using `rvm`:
+
+```
+rvm install "ruby-2.7.2"
+```
+
+Next, verify you are running the desired version:
+
+```
+rvm list
+```
+
+Ensure you have `mimemagic` installed on your environment, version 0.3.10.
+
 Install the dependencies:
 
 ```
