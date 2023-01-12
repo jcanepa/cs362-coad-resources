@@ -19,7 +19,7 @@ git clone git@github.com:YOURFORK/cs362-coad-resources.git
 This is a Rails application that uses SQLite in development and PostgreSQL in production.
 
 Prerequisites:
-Install a Ruby version manager like [rbenv]() or [rvm](). Use these utilities to install the appopriate version of Ruby as specified in the Gemfile. Ruby version 2.7.2, Rails version 5.2.4.6.
+Install a Ruby version manager like [rbenv](https://github.com/rbenv/rbenv) or [rvm](https://github.com/rvm/rvm). Use these utilities to install the appopriate version of Ruby as specified in the Gemfile. Ruby version 2.7.2, Rails version 5.2.4.6.
 
 Using `rvm`:
 
@@ -126,7 +126,7 @@ Email Server (Gmail)
 Recaptcha
 
 ## Data model
-![erd](public/documentation/erd.jpg?raw=true)
 
+![erd](public/documentation/erd.jpg?raw=true)
 
 &copy; 2020 James Martinez, Ryder McDowell. All rights reserved.
