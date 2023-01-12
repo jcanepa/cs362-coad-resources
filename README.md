@@ -60,6 +60,14 @@ Start the app:
 rails server
 ```
 
+## Environment configuration file
+
+Copy `.env.example` to new file `.env` and fill in required environment variables.
+
+```
+cp .env.example .env
+```
+
 ## Testing
 
 This project uses RSpec for testing.
