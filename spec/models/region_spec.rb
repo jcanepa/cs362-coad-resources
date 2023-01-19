@@ -15,6 +15,7 @@ RSpec.describe Region, type: :model do
     name = 'Mt. Hood'
     region = Region.new(name: name)
     result = region.to_s
+    expect(result).to eq(name)
   end
 
 end
