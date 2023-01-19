@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Organization, type: :model do
-    
+
     let(:organization) {
         Organization.create(
         name: "name",
@@ -24,12 +24,23 @@ RSpec.describe Organization, type: :model do
         Organization.new
     end
 
+    it "has a name" do 
+        org = organization
+        expect(org).to respond_to(:name)
+    end
+
     it "has a string representation  that is its name" do
         name = "name"
         org = organization
-        org_name = org.name
-        expect(name).to eq(org_name)
+        expect(name).to eq(org.to_s)
     end
+
+    it "has a status" do 
+        org = organization
+        expect(org).to respond_to(:status)
+    end
+
+
 
 
 
