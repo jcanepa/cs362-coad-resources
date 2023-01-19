@@ -3,6 +3,7 @@ class User < ApplicationRecord
   enum role: [:admin, :organization]
   after_initialize :set_default_role, :if => :new_record?
 
+  # Model associations
   belongs_to :organization, optional: true
 
   devise :database_authenticatable, :registerable,

@@ -7,6 +7,7 @@ class Organization < ApplicationRecord
 
   after_initialize :set_default_status, :if => :new_record?
 
+  # Model associations
   has_many :users
   has_many :tickets
   has_and_belongs_to_many :resource_categories
