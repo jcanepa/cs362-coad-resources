@@ -1,5 +1,6 @@
 class Ticket < ApplicationRecord
 
+  # Model associations
   belongs_to :region
   belongs_to :resource_category
   belongs_to :organization, optional: true

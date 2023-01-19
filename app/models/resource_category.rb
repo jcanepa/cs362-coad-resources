@@ -1,5 +1,6 @@
 class ResourceCategory < ApplicationRecord
 
+  # Model associations
   has_and_belongs_to_many :organizations
   has_many :tickets
 
