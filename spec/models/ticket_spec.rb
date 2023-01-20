@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Ticket, type: :model do
+
   let(:category) { ResourceCategory.new }
   let(:region) { Region.new }
   let (:ticket) { Ticket.create(
@@ -11,7 +12,6 @@ RSpec.describe Ticket, type: :model do
     resource_category_id: category.id,
     closed: false
   )}
-
 
   it "exists" do
     Ticket.new
@@ -39,5 +39,9 @@ RSpec.describe Ticket, type: :model do
 
   it "has a closed state" do
     expect(ticket).to respond_to(:closed)
+  end
+
+  it "belongs to a region" do
+    should belong_to(:region).class_name('Region')
   end
 end
