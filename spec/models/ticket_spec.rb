@@ -1,9 +1,24 @@
 require 'rails_helper'
 
 RSpec.describe Ticket, type: :model do
-  let (:ticket) { Ticket.new }
+  let(:category) { ResourceCategory.new }
+  let(:region) { Region.new }
+  let (:ticket) { Ticket.create(
+    name: 'Foo',
+    phone: '+15414541232',
+    description: "Lorem ipsum",
+    region_id: region.id,
+    resource_category_id: category.id,
+    closed: false
+  )}
+
 
   it "exists" do
-    ticket
+    Ticket.new
   end
+
+  it "has a name" do
+    expect(ticket).to respond_to(:name)
+  end
+
 end
