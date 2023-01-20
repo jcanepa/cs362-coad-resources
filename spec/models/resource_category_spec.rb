@@ -9,6 +9,7 @@ RSpec.describe ResourceCategory, type: :model do
     resource_category
   end
 
+  # Test attributes
   it "has a name" do
     expect(resource_category).to respond_to(:name)
   end
@@ -17,6 +18,7 @@ RSpec.describe ResourceCategory, type: :model do
     expect(resource_category).to respond_to(:active)
   end
 
+  # Test associations
   context 'associations' do
     it { should have_and_belong_to_many(:organizations).class_name('Organization') }
     it { should have_many(:tickets).class_name('Ticket') }
