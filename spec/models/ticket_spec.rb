@@ -29,4 +29,8 @@ RSpec.describe Ticket, type: :model do
     expect(ticket).to respond_to(:description)
   end
 
+  it "references a region" do
+    expect(ticket).to respond_to(:region_id)
+  end
+
 end
