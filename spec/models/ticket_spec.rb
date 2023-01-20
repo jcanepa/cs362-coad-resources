@@ -33,4 +33,8 @@ RSpec.describe Ticket, type: :model do
     expect(ticket).to respond_to(:region_id)
   end
 
+  it "references a resource category" do
+    expect(ticket).to respond_to(:resource_category_id)
+  end
+
 end
