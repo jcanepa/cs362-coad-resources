@@ -4,14 +4,15 @@ RSpec.describe Ticket, type: :model do
 
   let(:category) { ResourceCategory.new }
   let(:region) { Region.new }
-  let (:ticket) { Ticket.create(
-    name: 'Foo',
-    phone: '+15414541232',
-    description: "Lorem ipsum",
-    region_id: region.id,
-    resource_category_id: category.id,
-    closed: false
-  )}
+  let (:ticket) {
+    Ticket.create(
+      name: 'Foo',
+      phone: '+1234567890',
+      description: "Lorem ipsum",
+      region_id: region.id,
+      resource_category_id: category.id,
+      closed: false)
+    }
 
   it "exists" do
     Ticket.new
