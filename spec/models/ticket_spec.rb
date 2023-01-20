@@ -11,8 +11,9 @@ RSpec.describe Ticket, type: :model do
       description: "Lorem ipsum",
       region_id: region.id,
       resource_category_id: category.id,
-      closed: false)
-    }
+      closed: false
+    )
+  }
 
   it "exists" do
     Ticket.new
