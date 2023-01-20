@@ -37,4 +37,7 @@ RSpec.describe Ticket, type: :model do
     expect(ticket).to respond_to(:resource_category_id)
   end
 
+  it "has a closed state" do
+    expect(ticket).to respond_to(:closed)
+  end
 end
