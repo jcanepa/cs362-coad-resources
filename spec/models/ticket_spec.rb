@@ -41,15 +41,11 @@ RSpec.describe Ticket, type: :model do
     expect(ticket).to respond_to(:closed)
   end
 
-  it "belongs to a region" do
-    should belong_to(:region).class_name('Region')
-  end
+  it { should belong_to(:region).class_name('Region') }
 
-  it "belongs to a resource category" do
-    should belong_to(:resource_category).class_name('ResourceCategory')
-  end
+  it { should belong_to(:resource_category).class_name('ResourceCategory') }
 
-  it "belongs to an organization" do
-    should belong_to(:organization).class_name('Organization')
-  end
+  it { should belong_to(:organization).class_name('Organization') }
+
+  # it { should belong_to(:organization).optional }
 end
