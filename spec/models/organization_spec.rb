@@ -71,6 +71,10 @@ RSpec.describe Organization, type: :model do
       expect(organization.reject).to eq(:rejected)
     end
 
+    it "set default status" do
+      expect(organization.set_default_status).to eq("submitted")
+    end
+
     it "has a string representation" do
         name = "name"
         org = organization
