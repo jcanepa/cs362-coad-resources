@@ -35,6 +35,10 @@ RSpec.describe Organization, type: :model do
       expect(organization).to respond_to(:email)
     end
 
+    it "has a phone number" do
+      expect(organization).to respond_to(:phone)
+    end
+
     it "has liability insurance" do
       expect(organization).to respond_to(:liability_insurance)
     end
@@ -51,8 +55,12 @@ RSpec.describe Organization, type: :model do
       expect(organization).to respond_to(:title)
     end
 
-    it "has a phone number" do
-      expect(organization).to respond_to(:phone)
+    it "has transportation set" do
+      expect(organization).to respond_to(:transportation)
+    end
+
+    it "has a description" do
+      expect(organization).to respond_to(:description)
     end
 
     it "has a string representation" do
