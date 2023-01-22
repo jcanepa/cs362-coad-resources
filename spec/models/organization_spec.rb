@@ -63,6 +63,10 @@ RSpec.describe Organization, type: :model do
       expect(organization).to respond_to(:description)
     end
 
+    it "set status to approved" do
+      expect(organization.approve).to eq(:approved)
+    end
+
     it "has a string representation" do
         name = "name"
         org = organization
