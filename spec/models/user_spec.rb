@@ -4,7 +4,7 @@ RSpec.describe User, type: :model do
 
     let (:user) { User.new }
 
-    # Test instanciation
+    # Test instantiation
 
     it "exists" do
         user
