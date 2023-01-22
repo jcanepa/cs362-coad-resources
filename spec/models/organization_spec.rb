@@ -63,18 +63,6 @@ RSpec.describe Organization, type: :model do
       expect(organization).to respond_to(:description)
     end
 
-    it "set status to approved" do
-      expect(organization.approve).to eq(:approved)
-    end
-
-    it "set status to rejected" do
-      expect(organization.reject).to eq(:rejected)
-    end
-
-    it "set default status" do
-      expect(organization.set_default_status).to eq("submitted")
-    end
-
     it "has a string representation" do
         name = "name"
         org = organization
@@ -89,9 +77,22 @@ RSpec.describe Organization, type: :model do
     it "has transportation" do
         expect(organization).to respond_to(:transportation)
     end
+    
+    # Testing functions
 
     it "has set_default_status" do
         expect(organization).to respond_to(:set_default_status)
+    end
+    it "set status to approved" do
+      expect(organization.approve).to eq(:approved)
+    end
+
+    it "set status to rejected" do
+      expect(organization.reject).to eq(:rejected)
+    end
+
+    it "set default status" do
+      expect(organization.set_default_status).to eq("submitted")
     end
 
     # Test associations
