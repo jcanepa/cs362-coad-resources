@@ -5,7 +5,7 @@ RSpec.describe Organization, type: :model do
     let(:organization) {
         Organization.create(
         name: "name",
-        email: "#{"name".split(" ").join(".")}@testing.com",
+        email: "name.@testing.com",
         phone: "541-398-3298",
         liability_insurance: true,
         primary_name: 'Primary Name',
@@ -20,16 +20,34 @@ RSpec.describe Organization, type: :model do
         status: 1
       )}
 
+    # Test Instantiation
     it "exists" do 
-        Organization.new
+        organization
     end
 
+    # Test Attributtes
     it "has a name" do 
         org = organization
         expect(org).to respond_to(:name)
     end
 
-    it "has a string representation  that is its name" do
+    it "has an email" do
+      expect(organization).to respond_to(:email)
+    end
+
+    it "has liability insurance" do
+      expect(organization).to respond_to(:liability_insurance)
+    end
+
+    it "has a primary name" do
+      expect(organization).to respond_to(:primary_name)
+    end
+
+    it "has a phone number" do
+      expect(organization).to respond_to(:phone)
+    end
+
+    it "has a string representation" do
         name = "name"
         org = organization
         expect(name).to eq(org.to_s)
@@ -40,8 +58,25 @@ RSpec.describe Organization, type: :model do
         expect(org).to respond_to(:status)
     end
 
+    it "has transportation" do
+        expect(organization).to respond_to(:transportation)
+    end
 
+    it "has set_default_status" do
+        expect(organization).to respond_to(:set_default_status)
+    end
 
+    # Test associations
 
+    context "association: has many users" do
+        it { should have_many(:users).class_name('User') }
+    end
 
+    context "associations: has many tickets" do
+      it { should have_many(:tickets).class_name('Ticket')}
+    end
+
+    context "associations: belongs to many resource categories" do
+      it { should have_and_belong_to_many(:resource_categories).class_name("ResourceCategory")}
+    end
 end
