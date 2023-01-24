@@ -141,4 +141,8 @@ RSpec.describe Organization, type: :model do
     it "verifies the uniqueness of an email" do 
       expect(organization).to validate_uniqueness_of(:email).ignoring_case_sensitivity
     end
+
+    it "verifies the presence of the phone" do 
+      expect(organization).to validate_presence_of(:phone)
+    end
 end
