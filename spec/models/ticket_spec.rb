@@ -47,7 +47,7 @@ RSpec.describe Ticket, type: :model do
   end
 
   # Test model associations (relationships)
-  context 'associations' do
+  describe 'associations' do
     it { should belong_to(:region).class_name('Region') }
     it { should belong_to(:resource_category).class_name('ResourceCategory') }
     it { should belong_to(:organization).class_name('Organization').optional }
