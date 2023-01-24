@@ -108,4 +108,17 @@ RSpec.describe Organization, type: :model do
     context "associations: belongs to many resource categories" do
       it { should have_and_belong_to_many(:resource_categories).class_name("ResourceCategory")}
     end
+    
+    # Validators
+    it "validates presence of name" do 
+      expect(organization).to validate_presence_of(:name)
+    end
+
+    it "verifies the minimum length of name" do
+      expect(organization).to validate_length_of(:name).is_at_least(1)
+    end
+
+    it "verfies the maximum length of name" do 
+      expect(organization).to validate_length_of(:name).is_at_most(255)
+    end
 end
