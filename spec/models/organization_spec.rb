@@ -122,6 +122,10 @@ RSpec.describe Organization, type: :model do
       expect(organization).to validate_length_of(:name).is_at_most(255)
     end
 
+    it "verifies the uniqueness of name" do
+      expect(organization).to validate_uniqueness_of(:name).ignoring_case_sensitivity
+    end
+
     it "validates presence of email" do 
       expect(organization).to validate_presence_of(:email)
     end
