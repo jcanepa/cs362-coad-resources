@@ -36,4 +36,26 @@ RSpec.describe User, type: :model do
         it { should belong_to(:organization).class_name('Organization').optional }
     end
 
+    # Test Validators
+
+    it "validates email presence" do
+        expect(user).to validate_presence_of(:email)
+    end
+
+    it "validates email length" do
+        expect(user).to validate_length_of(:email)
+    end
+
+    it "validates email uniqueness" do
+        expect(user).to validate_uniqueness_of(:email)
+    end
+
+    it "validates password presence" do
+        expect(user).to validate_presence_of(:password)
+    end
+
+    it "validates password length" do
+        expect(user).to validate_length_of(:password)
+    end
+
 end
