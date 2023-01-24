@@ -113,4 +113,8 @@ RSpec.describe Organization, type: :model do
     it "verifies the minimum length of name" do
       expect(organization).to validate_length_of(:name).is_at_least(1)
     end
+
+    it "verfies the maximum length of name" do 
+      expect(organization).to validate_length_of(:name).is_at_most(255)
+    end
 end
