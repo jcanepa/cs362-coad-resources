@@ -129,4 +129,12 @@ RSpec.describe Organization, type: :model do
     it "verifies the minimum length of email" do 
       expect(organization).to validate_length_of(:email).is_at_least(1)
     end
+
+    it "verifies the maximum length of an email" do
+      expect(organization).to validate_length_of(:email).is_at_most(255)
+    end
+
+    it "verifies the uniqueness of an email" do 
+      expect(organization).to validate_uniqueness_of(:email).ignoring_case_sensitivity
+    end
 end
