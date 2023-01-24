@@ -12,16 +12,22 @@ RSpec.describe User, type: :model do
 
     # Test attributes
 
-    it "has a name" do
-        expect(user).to respond_to(:name)
-    end
-
     it "has an email" do
         expect(user).to respond_to(:email)
     end
 
     it "has a password" do
         expect(user).to respond_to(:password)
+    end
+
+    # Test functions
+
+    it "can set default role" do
+        expect(user).to respond_to(:set_default_role)
+    end
+
+    it "can print email to string" do
+        expect(user).to respond_to(:to_s)
     end
 
     # Test associations
