@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Organization, type: :model do
 
     let(:organization) {
-        Organization.create(
+        Organization.new(
         name: "name",
         email: "name.@testing.com",
         phone: "541-398-3298",
