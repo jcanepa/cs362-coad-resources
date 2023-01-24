@@ -52,4 +52,12 @@ RSpec.describe Ticket, type: :model do
     it { should belong_to(:resource_category).class_name('ResourceCategory') }
     it { should belong_to(:organization).class_name('Organization').optional }
   end
+
+  # Test model validators
+  describe 'validations' do
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:phone) }
+    it { should validate_presence_of(:region_id) }
+    it { should validate_presence_of(:resource_category_id) }
+  end
 end
