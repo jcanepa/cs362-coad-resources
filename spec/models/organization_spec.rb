@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Organization, type: :model do
 
     let(:organization) {
-        Organization.create(
+        Organization.new(
         name: "name",
         email: "name.@testing.com",
         phone: "541-398-3298",
@@ -107,5 +107,26 @@ RSpec.describe Organization, type: :model do
 
     context "associations: belongs to many resource categories" do
       it { should have_and_belong_to_many(:resource_categories).class_name("ResourceCategory")}
+    end
+    
+    # Validators
+    it "validates presence of name" do 
+      expect(organization).to validate_presence_of(:name)
+    end
+
+    it "verifies the minimum length of name" do
+      expect(organization).to validate_length_of(:name).is_at_least(1)
+    end
+
+    it "verfies the maximum length of name" do 
+      expect(organization).to validate_length_of(:name).is_at_most(255)
+    end
+
+    it "validates presence of email" do 
+      expect(organization).to validate_presence_of(:email)
+    end
+
+    it "verifies the minimum length of email" do 
+      expect(organization).to validate_length_of(:email).is_at_least(1)
     end
 end

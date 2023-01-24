@@ -6,7 +6,7 @@ RSpec.describe Ticket, type: :model do
   let(:category) { ResourceCategory.new }
   let(:region) { Region.new }
 
-  let (:ticket) { Ticket.create(
+  let (:ticket) { Ticket.new(
     name: 'Foo',
     phone: '+1234567890',
     description: "Lorem ipsum",
@@ -47,9 +47,24 @@ RSpec.describe Ticket, type: :model do
   end
 
   # Test model associations (relationships)
-  context 'associations' do
+  describe 'associations' do
     it { should belong_to(:region).class_name('Region') }
     it { should belong_to(:resource_category).class_name('ResourceCategory') }
     it { should belong_to(:organization).class_name('Organization').optional }
+  end
+
+  # Test model validators
+  describe 'validations' do
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:phone) }
+    it { should validate_presence_of(:region_id) }
+    it { should validate_presence_of(:resource_category_id) }
+
+    it {
+      should validate_length_of(:name)
+      .is_at_least(1)
+      .is_at_most(255)
+      .on(:create)
+    }
   end
 end
