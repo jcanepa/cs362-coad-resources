@@ -6,7 +6,7 @@ RSpec.describe Ticket, type: :model do
   let(:category) { ResourceCategory.new }
   let(:region) { Region.new }
 
-  let (:ticket) { Ticket.create(
+  let (:ticket) { Ticket.new(
     name: 'Foo',
     phone: '+1234567890',
     description: "Lorem ipsum",
