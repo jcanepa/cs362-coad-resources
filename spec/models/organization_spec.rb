@@ -146,9 +146,13 @@ RSpec.describe Organization, type: :model do
       expect(organization).to validate_presence_of(:phone)
     end
 
-    # it "verifies email format with regex" do
-    #   expect(organization).to validate(:email).with(:format)
-    # end
+    it "verifies email format with regex" do
+      expect(organization.email).to match(Organization::VALID_EMAIL_REGEX)
+    end
+
+    it "verifies email incorrect" do
+      expect("invalidemail.com").to_not match(Organization::VALID_EMAIL_REGEX)
+    end
 
     it "verifies description max length" do
       expect(organization).to validate_length_of(:description).on(:create).is_at_most(1020)

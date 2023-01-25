@@ -26,4 +26,8 @@ RSpec.describe Region, type: :model do
     expect(region_unspecified.to_s).to eq("Unspecified")
   end
 
+  it "validates presence of name" do
+    expect(region).to validate_presence_of(:name)
+  end
+
 end
