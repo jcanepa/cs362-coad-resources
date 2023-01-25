@@ -98,15 +98,18 @@ RSpec.describe Organization, type: :model do
     # Test associations
 
     context "association: has many users" do
-        it { should have_many(:users).class_name('User') }
+        it { should have_many(:users)
+          .class_name('User') }
     end
 
     context "associations: has many tickets" do
-      it { should have_many(:tickets).class_name('Ticket')}
+      it { should have_many(:tickets)
+        .class_name('Ticket')}
     end
 
     context "associations: belongs to many resource categories" do
-      it { should have_and_belong_to_many(:resource_categories).class_name("ResourceCategory")}
+      it { should have_and_belong_to_many(:resource_categories)
+        .class_name("ResourceCategory")}
     end
     
     # Validators
@@ -115,15 +118,19 @@ RSpec.describe Organization, type: :model do
     end
 
     it "verifies the minimum length of name" do
-      expect(organization).to validate_length_of(:name).is_at_least(1)
+      expect(organization).to validate_length_of(:name)
+      .is_at_least(1)
     end
 
     it "verfies the maximum length of name" do 
-      expect(organization).to validate_length_of(:name).is_at_most(255)
+      expect(organization).to validate_length_of(:name)
+      .is_at_most(255)
     end
 
     it "verifies the uniqueness of name" do
-      expect(organization).to validate_uniqueness_of(:name).ignoring_case_sensitivity.on(:create)
+      expect(organization).to validate_uniqueness_of(:name)
+      .ignoring_case_sensitivity
+      .on(:create)
     end
 
     it "validates presence of email" do 
@@ -131,11 +138,15 @@ RSpec.describe Organization, type: :model do
     end
 
     it "verifies the minimum length of email" do 
-      expect(organization).to validate_length_of(:email).is_at_least(1).on(:create)
+      expect(organization).to validate_length_of(:email)
+      .is_at_least(1)
+      .on(:create)
     end
 
     it "verifies the maximum length of an email" do
-      expect(organization).to validate_length_of(:email).is_at_most(255).on(:create)
+      expect(organization).to validate_length_of(:email)
+      .is_at_most(255)
+      .on(:create)
     end
 
     it "verifies the uniqueness of an email" do 
@@ -143,7 +154,9 @@ RSpec.describe Organization, type: :model do
     end
 
     it "verifies description max length" do
-      expect(organization).to validate_length_of(:description).is_at_most(1020).on(:create)
+      expect(organization).to validate_length_of(:description)
+      .is_at_most(1020)
+      .on(:create)
     end
 
     it "verifies the presence of the phone" do 
