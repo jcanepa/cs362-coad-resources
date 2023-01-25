@@ -31,7 +31,11 @@ RSpec.describe Region, type: :model do
   end
 
   it "validates the minimum length of name" do
-    expect(region).to validate_length_of(:name).is_at_least(1)
+    expect(region).to validate_length_of(:name).is_at_least(1).on(:create)
+  end
+
+  it "validates the maximum length of name" do 
+    expect(region).to validate_length_of(:name).is_at_most(255).on(:create)
   end
 
 end
