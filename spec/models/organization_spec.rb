@@ -154,4 +154,8 @@ RSpec.describe Organization, type: :model do
       expect(organization).to validate_presence_of(:status)
     end
 
+    it "verifies the presence of primary_name" do
+      expect(organization).to validate_presence_of(:primary_name)
+    end
+
 end
