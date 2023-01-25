@@ -38,6 +38,10 @@ RSpec.describe Region, type: :model do
     expect(region).to validate_length_of(:name).is_at_most(255).on(:create)
   end
 
+  it "validates the uniqueness of a name" do 
+    expect(region).to validate_uniqueness_of(:name).ignoring_case_sensitivity
+  end
+
   it "validates unspecified static method" do
     expect(Region.unspecified.name).to eq("Unspecified")
   end 
