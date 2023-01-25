@@ -28,39 +28,48 @@ RSpec.describe Organization, type: :model do
     # Test Attributtes
     it "has a name" do 
         org = organization
-        expect(org).to respond_to(:name)
+        expect(org).to \
+        respond_to(:name)
     end
 
     it "has an email" do
-      expect(organization).to respond_to(:email)
+      expect(organization).to \
+      respond_to(:email)
     end
 
     it "has a phone number" do
-      expect(organization).to respond_to(:phone)
+      expect(organization).to \
+      respond_to(:phone)
     end
 
     it "has liability insurance" do
-      expect(organization).to respond_to(:liability_insurance)
+      expect(organization).to \
+      respond_to(:liability_insurance)
     end
 
     it "has a primary name" do
-      expect(organization).to respond_to(:primary_name)
+      expect(organization).to \
+      respond_to(:primary_name)
     end
 
     it "has a secondary name" do
-      expect(organization).to respond_to(:secondary_name)
+      expect(organization).to \
+      respond_to(:secondary_name)
     end
 
     it "has a title" do
-      expect(organization).to respond_to(:title)
+      expect(organization).to \
+      respond_to(:title)
     end
 
     it "has transportation set" do
-      expect(organization).to respond_to(:transportation)
+      expect(organization).to \
+      respond_to(:transportation)
     end
 
     it "has a description" do
-      expect(organization).to respond_to(:description)
+      expect(organization).to \
+      respond_to(:description)
     end
 
     it "has a string representation" do
@@ -75,24 +84,29 @@ RSpec.describe Organization, type: :model do
     end
 
     it "has transportation" do
-        expect(organization).to respond_to(:transportation)
+        expect(organization).to \
+        respond_to(:transportation)
     end
     
     # Testing functions
 
     it "has set_default_status" do
-        expect(organization).to respond_to(:set_default_status)
+        expect(organization).to \
+        respond_to(:set_default_status)
     end
     it "set status to approved" do
-      expect(organization.approve).to eq(:approved)
+      expect(organization.approve).to \
+      eq(:approved)
     end
 
     it "set status to rejected" do
-      expect(organization.reject).to eq(:rejected)
+      expect(organization.reject).to \
+      eq(:rejected)
     end
 
     it "set default status" do
-      expect(organization.set_default_status).to eq("submitted")
+      expect(organization.set_default_status).to \
+      eq("submitted")
     end
 
     # Test associations
@@ -114,69 +128,84 @@ RSpec.describe Organization, type: :model do
     
     # Validators
     it "validates presence of name" do 
-      expect(organization).to validate_presence_of(:name)
+      expect(organization).to \
+      validate_presence_of(:name)
     end
 
     it "verifies the minimum length of name" do
-      expect(organization).to validate_length_of(:name)
+      expect(organization).to \
+      validate_length_of(:name)
       .is_at_least(1)
     end
 
     it "verfies the maximum length of name" do 
-      expect(organization).to validate_length_of(:name)
+      expect(organization).to \
+      validate_length_of(:name)
       .is_at_most(255)
     end
 
     it "verifies the uniqueness of name" do
-      expect(organization).to validate_uniqueness_of(:name)
+      expect(organization).to \
+      validate_uniqueness_of(:name)
       .ignoring_case_sensitivity
       .on(:create)
     end
 
     it "validates presence of email" do 
-      expect(organization).to validate_presence_of(:email)
+      expect(organization).to \
+      validate_presence_of(:email)
     end
 
     it "verifies the minimum length of email" do 
-      expect(organization).to validate_length_of(:email)
+      expect(organization).to \
+      validate_length_of(:email)
       .is_at_least(1)
       .on(:create)
     end
 
     it "verifies the maximum length of an email" do
-      expect(organization).to validate_length_of(:email)
+      expect(organization).to \
+      validate_length_of(:email)
       .is_at_most(255)
       .on(:create)
     end
 
     it "verifies the uniqueness of an email" do 
-      expect(organization).to validate_uniqueness_of(:email).ignoring_case_sensitivity
+      expect(organization).to \
+      validate_uniqueness_of(:email)
+      .ignoring_case_sensitivity
     end
 
     it "verifies description max length" do
-      expect(organization).to validate_length_of(:description)
+      expect(organization).to \
+      validate_length_of(:description)
       .is_at_most(1020)
       .on(:create)
     end
 
     it "verifies the presence of the phone" do 
-      expect(organization).to validate_presence_of(:phone)
+      expect(organization).to \
+      validate_presence_of(:phone)
     end
 
     it "verifies presence of status" do 
-      expect(organization).to validate_presence_of(:status)
+      expect(organization).to \
+      validate_presence_of(:status)
     end
 
     it "verifies the presence of primary_name" do
-      expect(organization).to validate_presence_of(:primary_name)
+      expect(organization).to \
+      validate_presence_of(:primary_name)
     end
 
     it "verifies presence of secondary_name" do 
-      expect(organization).to validate_presence_of(:secondary_name)
+      expect(organization).to \
+      validate_presence_of(:secondary_name)
     end
 
     it "verifies presence of secondary_phone" do
-      expect(organization).to validate_presence_of(:secondary_phone)
+      expect(organization).to \
+      validate_presence_of(:secondary_phone)
     end
 
 end
