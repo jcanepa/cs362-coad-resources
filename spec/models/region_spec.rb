@@ -38,4 +38,8 @@ RSpec.describe Region, type: :model do
     expect(region).to validate_length_of(:name).is_at_most(255).on(:create)
   end
 
+  it "validates unspecified static method" do
+    expect(Region.unspecified.name).to eq("Unspecified")
+  end 
+
 end
