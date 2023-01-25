@@ -142,13 +142,16 @@ RSpec.describe Organization, type: :model do
       expect(organization).to validate_uniqueness_of(:email).ignoring_case_sensitivity
     end
 
+    it "verifies description max length" do
+      expect(organization).to validate_length_of(:description).is_at_most(1020).on(:create)
+    end
+
     it "verifies the presence of the phone" do 
       expect(organization).to validate_presence_of(:phone)
     end
 
-
-    it "verifies description max length" do
-      expect(organization).to validate_length_of(:description).is_at_most(1020).on(:create)
+    it "verifies presence of status" do 
+      expect(organization).to validate_presence_of(:status)
     end
 
 end
