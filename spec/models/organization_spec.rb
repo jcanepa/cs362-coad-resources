@@ -162,4 +162,8 @@ RSpec.describe Organization, type: :model do
       expect(organization).to validate_presence_of(:secondary_name)
     end
 
+    it "verifies presence of secondary_phone" do
+      expect(organization).to validate_presence_of(:secondary_phone)
+    end
+
 end
