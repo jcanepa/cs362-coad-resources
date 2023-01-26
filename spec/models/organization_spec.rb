@@ -176,6 +176,17 @@ RSpec.describe Organization, type: :model do
       .ignoring_case_sensitivity
     end
 
+    it "verifies email format with regex" do
+      expect(organization.email).to \
+      match(Organization::VALID_EMAIL_REGEX)
+    end
+
+    it "verifies email incorrect with regex" do 
+      expect("invalid.com").not_to \
+      match(Organization::VALID_EMAIL_REGEX)
+    end
+
+
     it "verifies description max length" do
       expect(organization).to \
       validate_length_of(:description)
