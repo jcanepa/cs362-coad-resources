@@ -54,11 +54,11 @@ RSpec.describe Ticket, type: :model do
   end
 
   # Test model validators
-  it "object passes all model validations" do
-    ticket.valid?
-  end
-
   describe 'validations' do
+
+    it "Active Record object passes all model validations" do
+      ticket.valid?
+    end
 
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:phone) }
