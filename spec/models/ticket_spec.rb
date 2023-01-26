@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe Ticket, type: :model do
 
   # Dependency objects creation
-  let(:category) { ResourceCategory.new }
-  let(:region) { Region.new }
+  let(:category) { ResourceCategory.create(name: 'Test') }
+  let(:region) { Region.create(name: 'Test') }
 
   let (:ticket) { Ticket.new(
     name: 'Foo',
@@ -66,5 +66,27 @@ RSpec.describe Ticket, type: :model do
       .is_at_most(255)
       .on(:create)
     }
+
+    it {
+      should validate_length_of(:description)
+      .is_at_most(1020)
+      .on(:create)
+    }
+
+    it "accepts valid phone numbers", :pending do
+      category.save
+      region.save
+      ticket.save!
+    end
+
+    it "rejects invalid phone formats" do
+    end
+
+    it "rejects invalid phone characters" do
+    end
+
+    it "rejects invalid phone lengths" do
+    end
+
   end
 end
