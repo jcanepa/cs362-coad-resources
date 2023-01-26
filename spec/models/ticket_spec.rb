@@ -8,7 +8,7 @@ RSpec.describe Ticket, type: :model do
 
   let (:ticket) { Ticket.new(
     name: 'Foo',
-    phone: '+1234567890',
+    phone: '',
     description: "Lorem ipsum",
     region_id: region.id,
     resource_category_id: category.id,
@@ -54,7 +54,12 @@ RSpec.describe Ticket, type: :model do
   end
 
   # Test model validators
+  it "object passes all model validations" do
+    ticket.valid?
+  end
+
   describe 'validations' do
+
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:phone) }
     it { should validate_presence_of(:region_id) }
@@ -75,10 +80,12 @@ RSpec.describe Ticket, type: :model do
 
     it "accepts valid phone numbers" do
       ticket.phone = 5101234567
-      ticket.save!
+      ticket.valid?
     end
 
-    it "rejects invalid phone formats" do
+    it "rejects invalid phone formats starting with 1" do
+      ticket.phone = 1112223333
+      ticket.invalid?
     end
 
     it "rejects invalid phone characters" do
