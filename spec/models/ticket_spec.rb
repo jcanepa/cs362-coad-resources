@@ -73,9 +73,8 @@ RSpec.describe Ticket, type: :model do
       .on(:create)
     }
 
-    it "accepts valid phone numbers", :pending do
-      category.save
-      region.save
+    it "accepts valid phone numbers" do
+      ticket.phone = 5101234567
       ticket.save!
     end
 
