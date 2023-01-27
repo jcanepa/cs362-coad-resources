@@ -87,7 +87,7 @@ RSpec.describe Ticket, type: :model do
 
     it "rejects invalid phone characters" do
       ticket.name = '@'; ticket.description = '@'
-      ticket.phone = '@'
+      ticket.phone = '@@@@@@@@@@'
 
       expect(ticket).to_not be_valid
     end
@@ -116,5 +116,20 @@ RSpec.describe Ticket, type: :model do
       expect(ticket).to_not be_valid
     end
 
+    it "accepts phone numbers that are strings" do
+      ticket.name = '@'
+      ticket.description = '@'
+      ticket.phone = '5101234567'
+
+      expect(ticket).to be_valid
+    end
+
+    it "rejects phone numbers that include letters" do
+      ticket.name = '@'
+      ticket.description = '@'
+      ticket.phone = '510123456r'
+
+      expect(ticket).to_not be_valid
+    end
   end
 end
