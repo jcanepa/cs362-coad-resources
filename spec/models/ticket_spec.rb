@@ -134,4 +134,11 @@ RSpec.describe Ticket, type: :model do
       expect(ticket).to_not be_valid
     end
   end
+
+  # Test model methods (member functions)
+  describe "methods" do
+    it "responds to open? method" do
+      expect(ticket).to respond_to(:open?)
+    end
+  end
 end
