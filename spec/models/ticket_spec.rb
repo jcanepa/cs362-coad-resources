@@ -5,14 +5,13 @@ RSpec.describe Ticket, type: :model do
   # Dependency objects creation
   let(:category) { ResourceCategory.create(name: 'Test') }
   let(:region) { Region.create(name: 'Test') }
-
+  # Model object
   let (:ticket) { Ticket.new(
-    name: 'Foo',
+    name: '',
     phone: '',
-    description: "Lorem ipsum",
+    description: '',
     region_id: region.id,
-    resource_category_id: category.id,
-    closed: false)
+    resource_category_id: category.id)
   }
 
   # Test instanciation
@@ -56,8 +55,8 @@ RSpec.describe Ticket, type: :model do
   # Test model validators
   describe 'validations' do
 
-    it "passes all Active Record model validation" do
-      ticket.valid?
+    it "has required Active Record model validation logic" do
+      expect(ticket.valid?).to be false
     end
 
     it { should validate_presence_of(:name) }
