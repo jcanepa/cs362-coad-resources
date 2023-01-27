@@ -60,11 +60,11 @@ RSpec.describe Ticket, type: :model do
     end
 
     it "require a name, description and phone" do
-      ticket.name = 'f'
-      ticket.description = 'f'
+      ticket.name = '@'
+      ticket.description = '@'
       ticket.phone = 5101234567
-      ticket.save!
-      # expect(ticket.valid?).to be true
+
+      expect(ticket.valid?).to be true
     end
 
     it { should validate_presence_of(:name) }
