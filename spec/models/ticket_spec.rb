@@ -59,7 +59,7 @@ RSpec.describe Ticket, type: :model do
       expect(ticket.valid?).to be false
     end
 
-    it "requires a name, description and phone" do
+    it "requires a valid name, description and phone" do
       ticket.name = '@'
       ticket.description = '@'
       ticket.phone = 5101234567
@@ -89,14 +89,15 @@ RSpec.describe Ticket, type: :model do
       ticket.name = '@'; ticket.description = '@'
       ticket.phone = '@'
 
-      expect(ticket.invalid?).to be true
       expect(ticket).to_not be_valid
     end
 
-    it "rejects invalid phone characters" do
-    end
+    it "rejects no length phone numbers" do
+      ticket.name = '@'
+      ticket.description = '@'
+      ticket.phone = 0
 
-    it "rejects invalid phone lengths" do
+      expect(ticket).to_not be_valid
     end
 
   end
