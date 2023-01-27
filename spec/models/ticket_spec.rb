@@ -89,8 +89,8 @@ RSpec.describe Ticket, type: :model do
       ticket.name = '@'; ticket.description = '@'
       ticket.phone = '@'
 
-      # ticket.save!
       expect(ticket.invalid?).to be true
+      expect(ticket).to_not be_valid
     end
 
     it "rejects invalid phone characters" do
