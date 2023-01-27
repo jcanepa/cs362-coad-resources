@@ -56,7 +56,7 @@ RSpec.describe Ticket, type: :model do
   # Test model validators
   describe 'validations' do
 
-    it "Active Record object passes all model validations" do
+    it "passes all Active Record model validation" do
       ticket.valid?
     end
 
