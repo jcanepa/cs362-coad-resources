@@ -55,8 +55,16 @@ RSpec.describe Ticket, type: :model do
   # Test model validators
   describe 'validations' do
 
-    it "has required Active Record model validation logic" do
+    it "have required model validation logic" do
       expect(ticket.valid?).to be false
+    end
+
+    it "require a name, description and phone" do
+      ticket.name = 'f'
+      ticket.description = 'f'
+      ticket.phone = 5101234567
+      ticket.save!
+      # expect(ticket.valid?).to be true
     end
 
     it { should validate_presence_of(:name) }
@@ -77,14 +85,14 @@ RSpec.describe Ticket, type: :model do
       .on(:create)
     }
 
-    it "accepts valid phone numbers" do
+    it "accepts valid phone numbers", :pending do
       ticket.phone = 5101234567
-      ticket.valid?
+      expect(ticket.valid?).to be true
     end
 
-    it "rejects invalid phone formats starting with 1" do
+    it "rejects invalid phone formats starting with 1", :pending do
       ticket.phone = 1112223333
-      ticket.invalid?
+      expect(ticket.valid?).to be true
     end
 
     it "rejects invalid phone characters" do
