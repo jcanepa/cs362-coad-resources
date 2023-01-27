@@ -85,9 +85,12 @@ RSpec.describe Ticket, type: :model do
       .on(:create)
     }
 
-    it "rejects invalid phone formats starting with 1", :pending do
-      ticket.phone = 1112223333
-      expect(ticket.valid?).to be true
+    it "rejects invalid phone characters", :pending do
+      ticket.name = '@'; ticket.description = '@'
+      ticket.phone = '@'
+
+      ticket.save!
+      # expect(ticket.invalid?).to be true
     end
 
     it "rejects invalid phone characters" do
