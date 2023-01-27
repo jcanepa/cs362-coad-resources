@@ -2,9 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Ticket, type: :model do
 
-  # Dependency objects creation
+  # Dependency objects
   let(:category) { ResourceCategory.create(name: 'Test') }
   let(:region) { Region.create(name: 'Test') }
+
   # Model object
   let (:ticket) { Ticket.new(
     name: '',
@@ -20,29 +21,30 @@ RSpec.describe Ticket, type: :model do
   end
 
   # Test attributes
-  it "has a name" do
-    expect(ticket).to respond_to(:name)
-  end
+  describe "attributes" do
+    it "has a name" do
+      expect(ticket).to respond_to(:name)
+    end
 
-  it "has a phone number" do
-    expect(ticket).to respond_to(:phone)
-  end
+    it "has a phone number" do
+      expect(ticket).to respond_to(:phone)
+    end
 
-  it "has a description" do
-    expect(ticket).to respond_to(:description)
-  end
+    it "has a description" do
+      expect(ticket).to respond_to(:description)
+    end
 
-  # Foreign key attributes
-  it "references a region" do
-    expect(ticket).to respond_to(:region_id)
-  end
+    it "references a region" do
+      expect(ticket).to respond_to(:region_id)
+    end
 
-  it "references a resource category" do
-    expect(ticket).to respond_to(:resource_category_id)
-  end
+    it "references a resource category" do
+      expect(ticket).to respond_to(:resource_category_id)
+    end
 
-  it "has a closed state" do
-    expect(ticket).to respond_to(:closed)
+    it "has a closed state" do
+      expect(ticket).to respond_to(:closed)
+    end
   end
 
   # Test model associations (relationships)
@@ -52,7 +54,7 @@ RSpec.describe Ticket, type: :model do
     it { should belong_to(:organization).class_name('Organization').optional }
   end
 
-  # Test model validators
+  # Test model validation rules
   describe 'validation' do
 
     it "requires model validation logic" do
