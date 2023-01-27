@@ -92,10 +92,26 @@ RSpec.describe Ticket, type: :model do
       expect(ticket).to_not be_valid
     end
 
-    it "rejects no length phone numbers" do
+    it "rejects phone numbers that are too short" do
       ticket.name = '@'
       ticket.description = '@'
       ticket.phone = 0
+
+      expect(ticket).to_not be_valid
+    end
+
+    it "rejects phone numbers that are too long" do
+      ticket.name = '@'
+      ticket.description = '@'
+      ticket.phone = 510123456799
+
+      expect(ticket).to_not be_valid
+    end
+
+    it "rejects phone numbers that are implausible" do
+      ticket.name = '@'
+      ticket.description = '@'
+      ticket.phone = 0000000000
 
       expect(ticket).to_not be_valid
     end
