@@ -141,6 +141,7 @@ RSpec.describe Ticket, type: :model do
 
   # Test model methods (member functions)
   describe "methods" do
+    # open?()
     it "responds to open?" do
       expect(ticket).to respond_to(:open?)
     end
@@ -155,5 +156,9 @@ RSpec.describe Ticket, type: :model do
       expect(ticket.open?).to be false
     end
 
+    # captured?()
+    it "responds to captured?" do
+      expect(ticket).to respond_to(:captured?)
+    end
   end
 end
