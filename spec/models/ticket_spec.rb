@@ -160,6 +160,8 @@ RSpec.describe Ticket, type: :model do
       expect(ticket).to respond_to(:captured?)
     end
 
+    # finish captured? testing (after grokking it)
+
     it "responds to to_s" do
       expect(ticket).to respond_to(:to_s)
     end
