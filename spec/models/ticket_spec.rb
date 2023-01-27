@@ -15,6 +15,14 @@ RSpec.describe Ticket, type: :model do
     resource_category_id: category.id)
   }
 
+  let (:saved_ticket) { Ticket.create(
+    name: '@',
+    phone: 5101234567,
+    description: '@',
+    region_id: region.id,
+    resource_category_id: category.id)
+  }
+
   # Test instanciation
   it "exists" do
     Ticket.new
@@ -162,6 +170,10 @@ RSpec.describe Ticket, type: :model do
 
     it "responds to to_s" do
       expect(ticket).to respond_to(:to_s)
+    end
+
+    it "'Ticket {id}' returned by to_s" do
+      expect(saved_ticket.to_s).to eq("Ticket #{saved_ticket.id}")
     end
 
   end
