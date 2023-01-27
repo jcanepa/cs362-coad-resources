@@ -141,12 +141,19 @@ RSpec.describe Ticket, type: :model do
 
   # Test model methods (member functions)
   describe "methods" do
-    it "responds to open? method" do
+    it "responds to open?" do
       expect(ticket).to respond_to(:open?)
     end
 
-    it "open? returns negated closed attribute as a boolean" do
-      ticket
+    it "open? returns negated closed attribute" do
+      expect(ticket.closed).to be false
+      expect(ticket.open?).to be true
     end
+
+    it "closing ticket changes return value of open?" do
+      ticket.closed = true
+      expect(ticket.open?).to be false
+    end
+
   end
 end
