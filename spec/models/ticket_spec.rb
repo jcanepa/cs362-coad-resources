@@ -15,7 +15,7 @@ RSpec.describe Ticket, type: :model do
     resource_category_id: category.id)
   }
 
-  # Test instanciation
+  # Model instanciates
   it "exists" do
     Ticket.new
   end
@@ -176,6 +176,8 @@ RSpec.describe Ticket, type: :model do
 
       expect(t.to_s).to eq("Ticket #{t.id}")
     end
+  end
 
+  describe "scopes" do
   end
 end
