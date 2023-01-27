@@ -45,6 +45,10 @@ RSpec.describe Ticket, type: :model do
     it "has a closed state" do
       expect(ticket).to respond_to(:closed)
     end
+
+    it "defaults to false" do
+      expect(ticket.closed).to be false
+    end
   end
 
   # Test model associations (relationships)
@@ -139,6 +143,10 @@ RSpec.describe Ticket, type: :model do
   describe "methods" do
     it "responds to open? method" do
       expect(ticket).to respond_to(:open?)
+    end
+
+    it "open? returns negated closed attribute as a boolean" do
+      ticket
     end
   end
 end
