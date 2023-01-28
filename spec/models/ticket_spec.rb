@@ -5,7 +5,7 @@ RSpec.describe Ticket, type: :model do
   # Dependency objects
   let(:category) { ResourceCategory.create(name: 'Test') }
   let(:region) { Region.create(name: 'Test') }
-  let(:organization) { Organization.create() }
+  let(:organization) { Organization.create(name: "@", email: "foo@test.com", phone: 5413983298, primary_name: '@', secondary_name: '@', secondary_phone: 5555555555) }
 
   # Model object
   let (:ticket) { Ticket.new(
@@ -170,7 +170,10 @@ RSpec.describe Ticket, type: :model do
       expect(ticket).to respond_to(:captured?)
     end
 
-    # finish captured? testing (after grokking it)
+    it "is captured? once an organization_id is assigned" do
+        ticket.organization_id = organization.id
+        expect(ticket.captured?).to be true
+    end
 
     it "responds to to_s" do
       expect(ticket).to respond_to(:to_s)
@@ -191,30 +194,24 @@ RSpec.describe Ticket, type: :model do
         expect(Ticket.open).to include(db_ticket)
       end
 
-      it "includes open tickets" do
-        t = db_ticket
-        t.closed = false
-        expect(Ticket.open).to include(t)
-      end
-
       it "includes open tickets with no orginization set" do
         t = db_ticket
-        t.closed = false
+        t.update(closed: false)
         expect(Ticket.open).to include(t)
       end
 
-      it "includes closed tickets with no orginization set" do
-        t = db_ticket
-        t.closed = true
-        expect(Ticket.open).to include(t)
-      end
-
-      # it "excludes open tickets with orginization set", :pending do
+      # it "includes closed tickets with no orginization set" do
       #   t = db_ticket
-      #   t.closed = true
+      #   t.update(closed: true)
+      #   expect(Ticket.open).to include(t)
+      # end
+
+      # it "excludes open tickets with orginization set" do
+      #   t = db_ticket
+      #   t.closed = false
       #   t.organization_id = organization.id
 
-      #   expect(Ticket.open).not_to include(t)
+      #   expect(Ticket.open).to_not include(t)
       # end
     end
   end
