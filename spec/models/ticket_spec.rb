@@ -182,9 +182,7 @@ RSpec.describe Ticket, type: :model do
     end
 
     it "'Ticket {id}' returned by to_s" do
-      t = db_ticket
-
-      expect(t.to_s).to eq("Ticket #{t.id}")
+      expect(db_ticket.to_s).to eq("Ticket #{db_ticket.id}")
     end
   end
 
