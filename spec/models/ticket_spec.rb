@@ -15,6 +15,15 @@ RSpec.describe Ticket, type: :model do
     resource_category_id: category.id)
   }
 
+  # Persisted model object
+  let (:db_ticket) { Ticket.create(
+    name: '@',
+    phone: 5101234567,
+    description: '@',
+    region_id: region.id,
+    resource_category_id: category.id)
+  }
+
   # Model instanciates
   it "exists" do
     Ticket.new
@@ -167,17 +176,18 @@ RSpec.describe Ticket, type: :model do
     end
 
     it "'Ticket {id}' returned by to_s" do
-      t = Ticket.create(
-        name: '@',
-        phone: 5101234567,
-        description: '@',
-        region_id: region.id,
-        resource_category_id: category.id)
+      t = db_ticket
 
       expect(t.to_s).to eq("Ticket #{t.id}")
     end
   end
 
   describe "scopes" do
+
+    describe ".open" do
+      it "includes newly created tickets" do
+        expect(Ticket.open).to include(db_ticket)
+      end
+    end
   end
 end
