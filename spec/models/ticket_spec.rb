@@ -260,8 +260,10 @@ RSpec.describe Ticket, type: :model do
       end
 
       it "excludes open ticket with unknown organization" do
-        db_ticket.update(closed: false, organization_id: organization.id)
-        expect(Ticket.organization(99)).to_not include(db_ticket)
+        org1 = organization
+        org2 = organization
+        db_ticket.update(closed: false, organization_id: org1.id)
+        expect(Ticket.organization(99)).to_not include(org2.id)
       end
 
       it "excludes closed ticket with unknown organization" do
