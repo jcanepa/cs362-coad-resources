@@ -188,6 +188,12 @@ RSpec.describe Ticket, type: :model do
       it "includes newly created tickets" do
         expect(Ticket.open).to include(db_ticket)
       end
+
+      it "includes open tickets" do
+        open_ticket = db_ticket
+        open_ticket.closed = false
+        expect(Ticket.open).to include(open_ticket)
+      end
     end
   end
 end
