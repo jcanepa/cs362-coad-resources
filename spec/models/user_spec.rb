@@ -36,14 +36,24 @@ RSpec.describe User, type: :model do
 
     # Test functions
 
-    it "can set default role" do
+    it "has set_default_role" do
         expect(user)
         .to respond_to(:set_default_role)
     end
 
-    it "can print email to string" do
+    it "can set default role" do
+        expect(user.set_default_role)
+        .to eq("organization")
+    end
+
+    it "has to_s" do
         expect(user)
         .to respond_to(:to_s)
+    end
+
+    it "can print email to string" do
+        expect(user.to_s)
+        .to eq("email@email.com")
     end
 
     # Test associations
@@ -60,14 +70,14 @@ RSpec.describe User, type: :model do
     end
 
     
-    it "verifies the minimum length of name" do
+    it "verifies the minimum length of email" do
         expect(user)
         .to validate_length_of(:email)
         .is_at_least(1)
         .on(:create)
     end
 
-    it "verifies the maximum length of name" do
+    it "verifies the maximum length of email" do
         expect(user)
         .to validate_length_of(:email)
         .is_at_most(255)
@@ -80,9 +90,13 @@ RSpec.describe User, type: :model do
         .ignoring_case_sensitivity
     end
 
-    it "validates email structure (regex)" do
-        
-        #expect()
+    it "accepts valid email structure (regex)" do
+        user.valid?
+    end
+
+    it "rejects invalid email structure (regex)" do
+        user.email = "notanemail"
+        user.invalid?
     end
 
     it "validates password presence" do
@@ -103,5 +117,7 @@ RSpec.describe User, type: :model do
         .is_at_most(255)
         .on(:create)
     end
+
+    # Test scopes -- user.rb has no scopes
 
 end
