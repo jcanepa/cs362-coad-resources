@@ -247,10 +247,13 @@ RSpec.describe Ticket, type: :model do
         db_ticket.update(closed: true)
         expect(Ticket.all_organization).to_not include(db_ticket)
       end
-
     end
 
     describe ".organization" do
+      it "includes ticket with a given organization" do
+        db_ticket.update(organization_id: organization.id)
+        expect(Ticket.organization(db_ticket.organization_id)).to include(db_ticket)
+      end
     end
 
     describe ".closed_organization" do
