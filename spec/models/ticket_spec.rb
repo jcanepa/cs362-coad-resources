@@ -5,7 +5,7 @@ RSpec.describe Ticket, type: :model do
   # Dependency objects
   let(:category) { ResourceCategory.create(name: 'Test') }
   let(:region) { Region.create(name: 'Test') }
-  let(:organization) { Organization.create() }
+  let(:organization) { Organization.create(name: "@", email: "foo@test.com", phone: 5413983298, primary_name: '@', secondary_name: '@', secondary_phone: 5555555555) }
 
   # Model object
   let (:ticket) { Ticket.new(
@@ -32,6 +32,7 @@ RSpec.describe Ticket, type: :model do
 
   # Test attributes
   describe "attributes" do
+
     it "has a name" do
       expect(ticket).to respond_to(:name)
     end
@@ -71,7 +72,7 @@ RSpec.describe Ticket, type: :model do
   # Test model validation rules
   describe 'validation' do
 
-    it "requires model validation logic" do
+    it "requires newly created model objects to conatin required validation logic" do
       expect(ticket.valid?).to be false
     end
 
@@ -170,7 +171,11 @@ RSpec.describe Ticket, type: :model do
       expect(ticket).to respond_to(:captured?)
     end
 
-    # finish captured? testing (after grokking it)
+    it "is captured? once an organization_id is assigned" do
+        expect(ticket.captured?).to be false
+        ticket.organization_id = organization.id
+        expect(ticket.captured?).to be true
+    end
 
     it "responds to to_s" do
       expect(ticket).to respond_to(:to_s)
@@ -191,31 +196,39 @@ RSpec.describe Ticket, type: :model do
         expect(Ticket.open).to include(db_ticket)
       end
 
-      it "includes open tickets" do
-        t = db_ticket
-        t.closed = false
-        expect(Ticket.open).to include(t)
-      end
-
       it "includes open tickets with no orginization set" do
-        t = db_ticket
-        t.closed = false
-        expect(Ticket.open).to include(t)
+        db_ticket.update(closed: false)
+        expect(Ticket.open).to include(db_ticket)
       end
 
-      it "includes closed tickets with no orginization set" do
-        t = db_ticket
-        t.closed = true
-        expect(Ticket.open).to include(t)
+      it "excludes open tickets with orginization set" do
+        db_ticket.update(closed: false, organization_id: organization.id)
+        expect(Ticket.open).to_not include(db_ticket)
       end
 
-      # it "excludes open tickets with orginization set", :pending do
-      #   t = db_ticket
-      #   t.closed = true
-      #   t.organization_id = organization.id
-
-      #   expect(Ticket.open).not_to include(t)
-      # end
+      it "excludes closed tickets with no orginization set" do
+        db_ticket.update(closed: true)
+        expect(Ticket.open).to_not include(db_ticket)
+      end
     end
+
+    describe ".closed" do
+    end
+
+    describe ".all_organization" do
+    end
+
+    describe ".organization" do
+    end
+
+    describe ".closed_organization" do
+    end
+
+    describe ".region" do
+    end
+
+    describe ".resource_category" do
+    end
+
   end
 end
