@@ -282,6 +282,9 @@ RSpec.describe Ticket, type: :model do
     end
 
     describe ".resource_category" do
+      it "includes ticket matching a given resource category id" do
+        expect(Ticket.organization(db_ticket.resource_category_id)).to_not include(db_ticket)
+      end
     end
 
   end
