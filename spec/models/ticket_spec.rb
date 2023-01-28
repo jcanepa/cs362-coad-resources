@@ -209,13 +209,6 @@ RSpec.describe Ticket, type: :model do
         expect(Ticket.open).to_not include(db_ticket)
       end
 
-      # it "excludes open tickets with orginization set" do
-      #   t = db_ticket
-      #   t.update(closed: false)
-      #   t.organization_id = organization.id
-
-      #   expect(Ticket.open).to_not include(t)
-      # end
     end
   end
 end
