@@ -222,7 +222,6 @@ RSpec.describe Ticket, type: :model do
         db_ticket.update(closed: false)
         expect(Ticket.closed).to_not include(db_ticket)
       end
-
     end
 
     describe ".all_organization" do
