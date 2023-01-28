@@ -213,6 +213,12 @@ RSpec.describe Ticket, type: :model do
     end
 
     describe ".closed" do
+
+      it "includes closed tickets" do
+        db_ticket.update(closed: true)
+        expect(Ticket.closed).to include(db_ticket)
+      end
+
     end
 
     describe ".all_organization" do
