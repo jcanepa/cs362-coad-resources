@@ -34,6 +34,12 @@ RSpec.describe User, type: :model do
         .to respond_to(:role)
     end
 
+    # Test associations
+
+    context 'associations' do
+        it { should belong_to(:organization).class_name('Organization').optional }
+    end
+
     # Test functions
 
     it "has set_default_role" do
@@ -54,12 +60,6 @@ RSpec.describe User, type: :model do
     it "can print email to string" do
         expect(user.to_s)
         .to eq("email@email.com")
-    end
-
-    # Test associations
-
-    context 'associations' do
-        it { should belong_to(:organization).class_name('Organization').optional }
     end
 
     # Test Validators
