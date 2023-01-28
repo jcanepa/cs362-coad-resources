@@ -129,9 +129,9 @@ heroku config:set FOO=bar
 
 ## Production Dependencies
 
-PostgreSQL
-Email Server (Gmail)
-Recaptcha
+- PostgreSQL
+- Email Server (Gmail)
+- Recaptcha
 
 ## Data model
 
