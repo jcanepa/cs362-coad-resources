@@ -32,6 +32,7 @@ RSpec.describe Ticket, type: :model do
 
   # Test attributes
   describe "attributes" do
+
     it "has a name" do
       expect(ticket).to respond_to(:name)
     end
@@ -71,7 +72,7 @@ RSpec.describe Ticket, type: :model do
   # Test model validation rules
   describe 'validation' do
 
-    it "requires model validation logic" do
+    it "requires newly created model objects to conatin required validation logic" do
       expect(ticket.valid?).to be false
     end
 
@@ -171,6 +172,7 @@ RSpec.describe Ticket, type: :model do
     end
 
     it "is captured? once an organization_id is assigned" do
+        expect(ticket.captured?).to be false
         ticket.organization_id = organization.id
         expect(ticket.captured?).to be true
     end
@@ -208,7 +210,25 @@ RSpec.describe Ticket, type: :model do
         db_ticket.update(closed: true)
         expect(Ticket.open).to_not include(db_ticket)
       end
-
     end
+
+    describe ".closed" do
+    end
+
+    describe ".all_organization" do
+    end
+
+    describe ".organization" do
+    end
+
+    describe ".closed_organization" do
+    end
+
+    describe ".region" do
+    end
+
+    describe ".resource_category" do
+    end
+
   end
 end
