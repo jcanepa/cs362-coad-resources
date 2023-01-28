@@ -227,7 +227,6 @@ RSpec.describe Ticket, type: :model do
     end
 
     describe ".all_organization" do
-      # where(closed: false).where.not(organization_id: nil)
 
       it "includes open tickets with an organization set" do
         db_ticket.update(closed: false, organization_id: organization.id)
