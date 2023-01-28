@@ -188,6 +188,7 @@ RSpec.describe Ticket, type: :model do
     end
   end
 
+  # Model scopes (static class methods that create custom db queries)
   describe "scopes" do
 
     describe ".open" do
@@ -273,8 +274,6 @@ RSpec.describe Ticket, type: :model do
     end
 
     describe ".closed_organization" do
-
-
     end
 
     describe ".region" do
