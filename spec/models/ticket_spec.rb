@@ -195,7 +195,7 @@ RSpec.describe Ticket, type: :model do
         expect(Ticket.open).to include(t)
       end
 
-      it "excludes closed tickets with no orginization set" do
+      it "includes closed tickets with no orginization set" do
         t = db_ticket
         t.closed = true
         expect(Ticket.open).to include(t)
