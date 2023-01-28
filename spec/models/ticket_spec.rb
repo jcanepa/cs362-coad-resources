@@ -5,6 +5,7 @@ RSpec.describe Ticket, type: :model do
   # Dependency objects
   let(:category) { ResourceCategory.create(name: 'Test') }
   let(:region) { Region.create(name: 'Test') }
+  let(:organization) { Organization.create() }
 
   # Model object
   let (:ticket) { Ticket.new(
@@ -185,11 +186,18 @@ RSpec.describe Ticket, type: :model do
   describe "scopes" do
 
     describe ".open" do
-      it "includes newly created tickets" do
+
+      it "includes newly created tickets (tickets are open by default)" do
         expect(Ticket.open).to include(db_ticket)
       end
 
       it "includes open tickets" do
+        t = db_ticket
+        t.closed = false
+        expect(Ticket.open).to include(t)
+      end
+
+      it "includes open tickets with no orginization set" do
         t = db_ticket
         t.closed = false
         expect(Ticket.open).to include(t)
@@ -201,6 +209,13 @@ RSpec.describe Ticket, type: :model do
         expect(Ticket.open).to include(t)
       end
 
+      # it "excludes open tickets with orginization set", :pending do
+      #   t = db_ticket
+      #   t.closed = true
+      #   t.organization_id = organization.id
+
+      #   expect(Ticket.open).not_to include(t)
+      # end
     end
   end
 end
