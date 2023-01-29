@@ -8,6 +8,10 @@ RSpec.describe ResourceCategory, type: :model do
 
   let (:resource_category_unspecified) { ResourceCategory.unspecified }
 
+  let (:db_resource_category) { ResourceCategory.create(
+    name: 'db_name')
+  }
+
   # Test instanciation
 
   it "exists" do
@@ -88,6 +92,30 @@ RSpec.describe ResourceCategory, type: :model do
     expect(resource_category)
     .to validate_length_of(:name)
     .is_at_most(255)
+  end
+
+  # Test scopes
+
+  it ".active includes newly created resource categories (active by default)" do
+    expect(ResourceCategory.active)
+    .to include(db_resource_category)
+  end
+
+  it ".active excludes inactive resource categories" do
+    db_resource_category.update(active: false)
+    expect(ResourceCategory.active)
+    .to_not include(db_resource_category)
+  end
+
+  it ".inactive includes inactive resource categories" do
+    db_resource_category.update(active: false)
+    expect(ResourceCategory.inactive)
+    .to include(db_resource_category)
+  end
+
+  it ".inactive excludes active resource categories" do
+    expect(ResourceCategory.inactive)
+    .to_not include(db_resource_category)
   end
 
 end
