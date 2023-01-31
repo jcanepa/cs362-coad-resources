@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Region, type: :model do
 
-  let(:region) {Region.new(name: "name")}
+  let(:region) {create(:region)}
   let(:region_unspecified) {Region.unspecified}
 
   # Test instantiation
@@ -40,14 +40,14 @@ RSpec.describe Region, type: :model do
     .on(:create)
   end
 
-  it "validates the maximum length of name" do 
+  it "validates the maximum length of name" do
     expect(region).to \
     validate_length_of(:name)
     .is_at_most(255)
     .on(:create)
   end
 
-  it "validates the uniqueness of a name" do 
+  it "validates the uniqueness of a name" do
     expect(region).to \
     validate_uniqueness_of(:name)
     .ignoring_case_sensitivity
@@ -56,6 +56,6 @@ RSpec.describe Region, type: :model do
   it "validates unspecified static method" do
     expect(Region.unspecified.name).to \
     eq("Unspecified")
-  end 
+  end
 
 end
