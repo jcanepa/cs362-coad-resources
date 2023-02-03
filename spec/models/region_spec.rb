@@ -9,10 +9,6 @@ RSpec.describe Region, type: :model do
     region
   end
 
-  it "statically creates an unspecified instance" do
-    unspecified_region
-  end
-
   describe "attributes" do
 
     it "has a name" do
@@ -21,6 +17,10 @@ RSpec.describe Region, type: :model do
   end
 
   describe "methods" do
+
+    it "statically creates an unspecified instance" do
+      unspecified_region
+    end
 
     it "has a string representation of its name" do
       expect(region.to_s)
