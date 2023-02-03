@@ -201,7 +201,8 @@ RSpec.describe Ticket, type: :model do
       end
 
       it "excludes open tickets with orginization set" do
-        db_ticket.update(closed: false, organization_id: organization.id)
+        db_ticket.update(
+          closed: false, organization_id: organization.id)
         expect(Ticket.open)
           .to_not include(db_ticket)
       end
@@ -231,25 +232,31 @@ RSpec.describe Ticket, type: :model do
     describe ".all_organization" do
 
       it "includes open tickets with an organization set" do
-        db_ticket.update(closed: false, organization_id: organization.id)
+        db_ticket.update(
+          closed: false, organization_id: organization.id)
+
         expect(Ticket.all_organization)
           .to include(db_ticket)
       end
 
       it "excludes open tickets with no organization set" do
         db_ticket.update(closed: false)
+
         expect(Ticket.all_organization)
           .to_not include(db_ticket)
       end
 
       it "excludes closed tickets with an organization set" do
-        db_ticket.update(closed: true, organization_id: organization.id)
+        db_ticket.update(
+          closed: true, organization_id: organization.id)
+
         expect(Ticket.all_organization)
           .to_not include(db_ticket)
       end
 
       it "excludes closed tickets with no organization set" do
         db_ticket.update(closed: true)
+
         expect(Ticket.all_organization)
           .to_not include(db_ticket)
       end
@@ -258,7 +265,9 @@ RSpec.describe Ticket, type: :model do
     describe ".organization" do
 
       it "includes open ticket with a given organization" do
-        db_ticket.update(closed: false, organization_id: organization.id)
+        db_ticket.update(
+          closed: false, organization_id: organization.id)
+
         expect(
           Ticket.organization(
             db_ticket.organization_id))
@@ -266,7 +275,9 @@ RSpec.describe Ticket, type: :model do
       end
 
       it "excludes closed ticket with a given organization" do
-        db_ticket.update(closed: true, organization_id: organization.id)
+        db_ticket.update(
+          closed: true, organization_id: organization.id)
+
         expect(
           Ticket.organization(
             db_ticket.organization_id))
@@ -274,16 +285,26 @@ RSpec.describe Ticket, type: :model do
       end
 
       it "excludes open ticket with unknown organization" do
-        unknown = Organization.create(name: ".", email: "test@test.com", phone: 5103983298, primary_name: '.', secondary_name: '.', secondary_phone: 5555555555)
-        db_ticket.update(closed: false, organization_id: organization.id)
+        unknown = Organization.create(
+          name: ".",
+          email: "test@test.com",
+          phone: 5103983298,
+          primary_name: '.',
+          secondary_name: '.',
+          secondary_phone: 5555555555)
+
+        db_ticket.update(
+          closed: false, organization_id: organization.id)
+
         expect(
-          Ticket.organization(
-            unknown.id))
+          Ticket.organization(unknown.id))
             .to_not include(db_ticket)
       end
 
       it "excludes closed ticket with unknown organization" do
-        db_ticket.update(closed: true, organization_id: organization.id)
+        db_ticket.update(
+          closed: true, organization_id: organization.id)
+
         expect(
           Ticket.organization(99))
             .to_not include(db_ticket)
@@ -293,7 +314,9 @@ RSpec.describe Ticket, type: :model do
     describe ".closed_organization" do
 
       it "includes closed ticket with a given organization" do
-        db_ticket.update(closed: true, organization_id: organization.id)
+        db_ticket.update(
+          closed: true, organization_id: organization.id)
+
         expect(
           Ticket.closed_organization(
             db_ticket.organization_id))
@@ -301,7 +324,9 @@ RSpec.describe Ticket, type: :model do
       end
 
       it "excludes open ticket with a given organization" do
-        db_ticket.update(closed: false, organization_id: organization.id)
+        db_ticket.update(
+          closed: false, organization_id: organization.id)
+
         expect(
           Ticket.closed_organization(
             db_ticket.organization_id))
