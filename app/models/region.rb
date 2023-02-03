@@ -1,6 +1,5 @@
 class Region < ApplicationRecord
 
-  # Model associations
   has_many :tickets
 
   validates_presence_of :name
