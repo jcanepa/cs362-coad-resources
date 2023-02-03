@@ -8,13 +8,10 @@ RSpec.describe Ticket, type: :model do
   let(:organization) { Organization.create(name: "@", email: "foo@test.com", phone: 5413983298, primary_name: '@', secondary_name: '@', secondary_phone: 5555555555) }
 
   # Model object
-  let (:ticket) { Ticket.new(
-    name: '',
-    phone: '',
-    description: '',
+  let (:ticket) {
+    Ticket.new(
     region_id: region.id,
-    resource_category_id: category.id)
-  }
+    resource_category_id: category.id)}
 
   # Persisted model object
   let (:db_ticket) {
