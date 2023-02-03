@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Region, type: :model do
 
-  let(:region) {create(:region)}
-  let(:region_unspecified) {Region.unspecified}
+  let(:region) { create(:region) }
+  let(:unspecified_region) { Region.unspecified }
 
   # Model instanciates
   it "exists" do
@@ -25,7 +25,7 @@ RSpec.describe Region, type: :model do
     end
 
     it "testing unspecified creation" do
-      expect(region_unspecified.to_s).to \
+      expect(unspecified_region.to_s).to \
       eq("Unspecified")
     end
   end
