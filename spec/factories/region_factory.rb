@@ -1,5 +1,3 @@
 FactoryBot.define do
-  factory :region do
-    name { "name" }
-  end
+  factory :region do; end
 end

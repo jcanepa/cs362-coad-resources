@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Region, type: :model do
 
-  let(:region) { create(:region) }
+  let(:region) { create(:region, name: "foo") }
   let(:unspecified_region) { Region.unspecified }
 
   it "exists" do
@@ -20,7 +20,7 @@ RSpec.describe Region, type: :model do
 
     it "has a string representation that is its name" do
       expect(region.to_s)
-        .to eq("name")
+        .to eq("foo")
     end
 
     it "testing unspecified creation" do
@@ -56,7 +56,7 @@ RSpec.describe Region, type: :model do
     end
 
     it "validates unspecified static method" do
-      expect(Region.unspecified.name)
+      expect(unspecified_region.name)
         .to eq("Unspecified")
     end
   end
