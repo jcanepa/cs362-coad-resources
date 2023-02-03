@@ -17,18 +17,20 @@ RSpec.describe Ticket, type: :model do
   }
 
   # Persisted model object
-  let (:db_ticket) { Ticket.create(
-    name: '@',
-    phone: 5101234567,
-    description: '@',
-    region_id: region.id,
-    resource_category_id: category.id)
-  }
+  let (:db_ticket) {
+    create(
+      :ticket,
+      name: '@',
+      phone: 5101234567,
+      description: '@',
+      region_id: region.id,
+      resource_category_id: category.id)}
 
   it "exists" do
     Ticket.new
   end
 
+  # Test model attributes
   describe "attributes" do
 
     it "has a name" do
