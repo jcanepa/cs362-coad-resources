@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Ticket, type: :model do
 
-  # Dependency objects
+  # Dependencies
   let(:category) { ResourceCategory.create(name: 'Test') }
   let(:region) { Region.create(name: 'Test') }
   let(:organization) { Organization.create(name: "@", email: "foo@test.com", phone: 5413983298, primary_name: '@', secondary_name: '@', secondary_phone: 5555555555) }
@@ -25,12 +25,10 @@ RSpec.describe Ticket, type: :model do
     resource_category_id: category.id)
   }
 
-  # Model instanciates
   it "exists" do
     Ticket.new
   end
 
-  # Test attributes
   describe "attributes" do
 
     it "has a name" do
@@ -192,22 +190,26 @@ RSpec.describe Ticket, type: :model do
     describe ".open" do
 
       it "includes newly created tickets (tickets are open by default)" do
-        expect(Ticket.open).to include(db_ticket)
+        expect(Ticket.open)
+          .to include(db_ticket)
       end
 
       it "includes open tickets with no orginization set" do
         db_ticket.update(closed: false)
-        expect(Ticket.open).to include(db_ticket)
+        expect(Ticket.open)
+          .to include(db_ticket)
       end
 
       it "excludes open tickets with orginization set" do
         db_ticket.update(closed: false, organization_id: organization.id)
-        expect(Ticket.open).to_not include(db_ticket)
+        expect(Ticket.open)
+          .to_not include(db_ticket)
       end
 
       it "excludes closed tickets with no orginization set" do
         db_ticket.update(closed: true)
-        expect(Ticket.open).to_not include(db_ticket)
+        expect(Ticket.open)
+          .to_not include(db_ticket)
       end
     end
 
@@ -215,12 +217,14 @@ RSpec.describe Ticket, type: :model do
 
       it "includes closed tickets" do
         db_ticket.update(closed: true)
-        expect(Ticket.closed).to include(db_ticket)
+        expect(Ticket.closed)
+          .to include(db_ticket)
       end
 
       it "excludes opened tickets" do
         db_ticket.update(closed: false)
-        expect(Ticket.closed).to_not include(db_ticket)
+        expect(Ticket.closed)
+          .to_not include(db_ticket)
       end
     end
 
@@ -228,22 +232,26 @@ RSpec.describe Ticket, type: :model do
 
       it "includes open tickets with an organization set" do
         db_ticket.update(closed: false, organization_id: organization.id)
-        expect(Ticket.all_organization).to include(db_ticket)
+        expect(Ticket.all_organization)
+          .to include(db_ticket)
       end
 
       it "excludes open tickets with no organization set" do
         db_ticket.update(closed: false)
-        expect(Ticket.all_organization).to_not include(db_ticket)
+        expect(Ticket.all_organization)
+          .to_not include(db_ticket)
       end
 
       it "excludes closed tickets with an organization set" do
         db_ticket.update(closed: true, organization_id: organization.id)
-        expect(Ticket.all_organization).to_not include(db_ticket)
+        expect(Ticket.all_organization)
+          .to_not include(db_ticket)
       end
 
       it "excludes closed tickets with no organization set" do
         db_ticket.update(closed: true)
-        expect(Ticket.all_organization).to_not include(db_ticket)
+        expect(Ticket.all_organization)
+          .to_not include(db_ticket)
       end
     end
 
@@ -251,23 +259,34 @@ RSpec.describe Ticket, type: :model do
 
       it "includes open ticket with a given organization" do
         db_ticket.update(closed: false, organization_id: organization.id)
-        expect(Ticket.organization(db_ticket.organization_id)).to include(db_ticket)
+        expect(
+          Ticket.organization(
+            db_ticket.organization_id))
+            .to include(db_ticket)
       end
 
       it "excludes closed ticket with a given organization" do
         db_ticket.update(closed: true, organization_id: organization.id)
-        expect(Ticket.organization(db_ticket.organization_id)).to_not include(db_ticket)
+        expect(
+          Ticket.organization(
+            db_ticket.organization_id))
+            .to_not include(db_ticket)
       end
 
       it "excludes open ticket with unknown organization" do
         unknown = Organization.create(name: ".", email: "test@test.com", phone: 5103983298, primary_name: '.', secondary_name: '.', secondary_phone: 5555555555)
         db_ticket.update(closed: false, organization_id: organization.id)
-        expect(Ticket.organization(unknown.id)).to_not include(db_ticket)
+        expect(
+          Ticket.organization(
+            unknown.id))
+            .to_not include(db_ticket)
       end
 
       it "excludes closed ticket with unknown organization" do
         db_ticket.update(closed: true, organization_id: organization.id)
-        expect(Ticket.organization(99)).to_not include(db_ticket)
+        expect(
+          Ticket.organization(99))
+            .to_not include(db_ticket)
       end
     end
 
@@ -275,26 +294,38 @@ RSpec.describe Ticket, type: :model do
 
       it "includes closed ticket with a given organization" do
         db_ticket.update(closed: true, organization_id: organization.id)
-        expect(Ticket.closed_organization(db_ticket.organization_id)).to include(db_ticket)
+        expect(
+          Ticket.closed_organization(
+            db_ticket.organization_id))
+            .to include(db_ticket)
       end
 
       it "excludes open ticket with a given organization" do
         db_ticket.update(closed: false, organization_id: organization.id)
-        expect(Ticket.closed_organization(db_ticket.organization_id)).to_not include(db_ticket)
+        expect(
+          Ticket.closed_organization(
+            db_ticket.organization_id))
+            .to_not include(db_ticket)
       end
     end
 
     describe ".region" do
 
       it "includes ticket matching a given region id" do
-        expect(Ticket.organization(db_ticket.region_id)).to_not include(db_ticket)
+        expect(
+          Ticket.organization(
+            db_ticket.region_id))
+            .to_not include(db_ticket)
       end
     end
 
     describe ".resource_category" do
 
       it "includes ticket matching a given resource category id" do
-        expect(Ticket.organization(db_ticket.resource_category_id)).to_not include(db_ticket)
+        expect(
+          Ticket.organization(
+            db_ticket.resource_category_id))
+            .to_not include(db_ticket)
       end
     end
 
