@@ -173,6 +173,8 @@ GEM
     minitest (5.17.0)
     msgpack (1.6.0)
     nenv (0.3.0)
+    net-http (0.3.2)
+      uri
     net-imap (0.3.4)
       date
       net-protocol
@@ -316,6 +318,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
+    uri (0.12.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (3.7.0)
@@ -356,6 +359,7 @@ DEPENDENCIES
   jquery-rails
   letter_opener
   listen (>= 3.0.5, < 3.2)
+  net-http
   pagy
   phony_rails
   puma (~> 3.12)
@@ -380,4 +384,4 @@ RUBY VERSION
    ruby 2.7.2p137
 
 BUNDLED WITH
-   2.4.3
+   2.4.4
