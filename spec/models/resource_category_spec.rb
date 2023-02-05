@@ -2,17 +2,21 @@ require 'rails_helper'
 
 RSpec.describe ResourceCategory, type: :model do
 
-  let (:resource_category) { ResourceCategory.new(
-    name: 'name') 
-  }
+  # Factory Instantiation
+
+  let (:resource_category) { create(:resource_category,
+    name: 'name'
+  ) }
 
   let (:resource_category_unspecified) { ResourceCategory.unspecified }
 
-  let (:db_resource_category) { ResourceCategory.create(
-    name: 'db_name')
-  }
+  # Factory instantiation
 
-  # Test instanciation
+  let (:db_resource_category) { create(:resource_category,
+    name: 'db_name'
+  ) }
+
+  # Test instantiation
 
   it "exists" do
     resource_category
@@ -86,12 +90,14 @@ RSpec.describe ResourceCategory, type: :model do
     expect(resource_category)
     .to validate_length_of(:name)
     .is_at_least(1)
+    .on(:create)
   end
 
   it "verifies maximum length of name" do
     expect(resource_category)
     .to validate_length_of(:name)
     .is_at_most(255)
+    .on(:create)
   end
 
   # Test scopes

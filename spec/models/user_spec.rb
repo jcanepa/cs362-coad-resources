@@ -2,13 +2,11 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
-    let (:user) { 
-        User.new(
-
+    # Factory instantiation
+    let (:user) { create(:user,
             email: "email@email.com",
             password: "password",
             role: 1
-
     ) }
 
     # Test instantiation
@@ -102,6 +100,7 @@ RSpec.describe User, type: :model do
     it "validates password presence" do
         expect(user)
         .to validate_presence_of(:password)
+        .on(:create)
     end
 
     it "validates the minimum length of name" do
