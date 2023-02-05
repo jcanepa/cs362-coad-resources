@@ -1,24 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Organization, type: :model do
-
-    let(:organization) {
-        Organization.new(
-        name: "name",
-        email: "name.@testing.com",
-        phone: "541-398-3298",
-        liability_insurance: true,
-        primary_name: 'Primary Name',
-        secondary_name: 'Secondary Name',
-        secondary_phone: '555-555-5555',
-        title: 'Title',
-        transportation: :yes,
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                      et dolore magna aliqua. Quam adipiscing vitae proin sagittis nisl rhoncus. Nunc faucibus a pellentesque
-                      sit amet porttitor eget dolor morbi. Eu non diam phasellus vestibulum lorem sed risus ultricies tristique.
-                      Eu facilisis sed odio morbi quis commodo odio aenean sed. Aliquam purus sit amet luctus venenatis lectus magna.",
-        status: 1
-      )}
+ 
+  let(:organization) {build(:organization)}
+  let(:named_org) {build(:organization, :name => 'name')}
+  let(:email_org) {build(:organization, :email => 'name@testing.com')}
+  let(:phone_org) {build(:organization, :phone => '555-555-5555S')}
+  let(:liability_org) {build(:organization, :liability_insurance => true)}
+  let(:primary_name_org) {build(:organization, :primary_name => 'Primary Name')}
+  let(:secondary_name_org) {build(:organization, :secondary_name => 'Secondary Name')}
+  let(:incorrect_email_org) {build(:organization, :email => "notFormattedCorrectly")}
 
     # Test Instantiation
     it "exists" do 
@@ -27,33 +18,33 @@ RSpec.describe Organization, type: :model do
 
     # Test Attributtes
     it "has a name" do 
-        org = organization
-        expect(org).to \
+        #org = organization
+        expect(named_org).to \
         respond_to(:name)
     end
 
     it "has an email" do
-      expect(organization).to \
+      expect(email_org).to \
       respond_to(:email)
     end
 
     it "has a phone number" do
-      expect(organization).to \
+      expect(phone_org).to \
       respond_to(:phone)
     end
 
     it "has liability insurance" do
-      expect(organization).to \
+      expect(liability_org).to \
       respond_to(:liability_insurance)
     end
 
     it "has a primary name" do
-      expect(organization).to \
+      expect(primary_name_org).to \
       respond_to(:primary_name)
     end
 
     it "has a secondary name" do
-      expect(organization).to \
+      expect(secondary_name_org).to \
       respond_to(:secondary_name)
     end
 
@@ -73,9 +64,7 @@ RSpec.describe Organization, type: :model do
     end
 
     it "has a string representation" do
-        name = "name"
-        org = organization
-        expect(name).to eq(org.to_s)
+        expect(named_org.to_s).to eq("name")
     end
 
     it "has a status" do 
@@ -94,6 +83,7 @@ RSpec.describe Organization, type: :model do
         expect(organization).to \
         respond_to(:set_default_status)
     end
+
     it "set status to approved" do
       expect(organization.approve).to \
       eq(:approved)
@@ -171,22 +161,21 @@ RSpec.describe Organization, type: :model do
     end
 
     it "verifies the uniqueness of an email" do 
-      expect(organization).to \
+      expect(email_org).to \
       validate_uniqueness_of(:email)
       .ignoring_case_sensitivity
     end
 
     it "verifies email format with regex" do
-      expect(organization.email).to \
+      expect(email_org.email).to \
       match(Organization::VALID_EMAIL_REGEX)
     end
 
     it "verifies email incorrect with regex" do 
-      expect("invalid.com").not_to \
+      expect(incorrect_email_org.email).not_to \
       match(Organization::VALID_EMAIL_REGEX)
     end
-
-
+    
     it "verifies description max length" do
       expect(organization).to \
       validate_length_of(:description)
