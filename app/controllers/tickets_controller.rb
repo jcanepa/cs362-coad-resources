@@ -1,6 +1,7 @@
 class TicketsController < ApplicationController
   include TicketsHelper
 
+  # only admins are allowed to delete resources
   before_action :authenticate_admin, only: :destroy
 
   def new
@@ -74,7 +75,9 @@ class TicketsController < ApplicationController
   private
 
   def ticket_params
-    params.require(:ticket).permit(:name, :phone, :description, :region_id, :resource_category_id)
+    params
+      .require(:ticket)
+      .permit(:name, :phone, :description, :region_id, :resource_category_id)
   end
 
 end
