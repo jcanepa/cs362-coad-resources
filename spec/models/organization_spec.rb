@@ -9,8 +9,16 @@ RSpec.describe Organization, type: :model do
   let(:liability_org) {build(:organization, :liability_insurance => true)}
   let(:primary_name_org) {build(:organization, :primary_name => 'Primary Name')}
   let(:secondary_name_org) {build(:organization, :secondary_name => 'Secondary Name')}
+  let(:secondary_phone_org) {build(:organization, :secondary_phone => "555-555-5555")}
   let(:incorrect_email_org) {build(:organization, :email => "notFormattedCorrectly")}
-
+  let(:title_org) {build(:organization, :title => "Title")}
+  let(:transport_org) {build(:organization, :transportation => :yes)}
+  let(:description_org) {build(:organization, :description => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+    et dolore magna aliqua. Quam adipiscing vitae proin sagittis nisl rhoncus. Nunc faucibus a pellentesque
+    sit amet porttitor eget dolor morbi. Eu non diam phasellus vestibulum lorem sed risus ultricies tristique.
+    Eu facilisis sed odio morbi quis commodo odio aenean sed. Aliquam purus sit amet luctus venenatis lectus magna.")}
+  let(:status_org) {build(:organization, :status =>1)}
+    
     # Test Instantiation
     it "exists" do 
         organization
@@ -49,17 +57,17 @@ RSpec.describe Organization, type: :model do
     end
 
     it "has a title" do
-      expect(organization).to \
+      expect(title_org).to \
       respond_to(:title)
     end
 
     it "has transportation set" do
-      expect(organization).to \
+      expect(transport_org).to \
       respond_to(:transportation)
     end
 
     it "has a description" do
-      expect(organization).to \
+      expect(description_org).to \
       respond_to(:description)
     end
 
@@ -68,12 +76,11 @@ RSpec.describe Organization, type: :model do
     end
 
     it "has a status" do 
-        org = organization
-        expect(org).to respond_to(:status)
+        expect(status_org).to respond_to(:status)
     end
 
     it "has transportation" do
-        expect(organization).to \
+        expect(transport_org).to \
         respond_to(:transportation)
     end
     
@@ -118,43 +125,43 @@ RSpec.describe Organization, type: :model do
     
     # Validators
     it "validates presence of name" do 
-      expect(organization).to \
+      expect(named_org).to \
       validate_presence_of(:name)
     end
 
     it "verifies the minimum length of name" do
-      expect(organization).to \
+      expect(named_org).to \
       validate_length_of(:name)
       .is_at_least(1)
     end
 
     it "verfies the maximum length of name" do 
-      expect(organization).to \
+      expect(named_org).to \
       validate_length_of(:name)
       .is_at_most(255)
     end
 
     it "verifies the uniqueness of name" do
-      expect(organization).to \
+      expect(named_org).to \
       validate_uniqueness_of(:name)
       .ignoring_case_sensitivity
       .on(:create)
     end
 
     it "validates presence of email" do 
-      expect(organization).to \
+      expect(email_org).to \
       validate_presence_of(:email)
     end
 
     it "verifies the minimum length of email" do 
-      expect(organization).to \
+      expect(email_org).to \
       validate_length_of(:email)
       .is_at_least(1)
       .on(:create)
     end
 
     it "verifies the maximum length of an email" do
-      expect(organization).to \
+      expect(email_org).to \
       validate_length_of(:email)
       .is_at_most(255)
       .on(:create)
@@ -177,34 +184,34 @@ RSpec.describe Organization, type: :model do
     end
     
     it "verifies description max length" do
-      expect(organization).to \
+      expect(description_org).to \
       validate_length_of(:description)
       .is_at_most(1020)
       .on(:create)
     end
 
     it "verifies the presence of the phone" do 
-      expect(organization).to \
+      expect(phone_org).to \
       validate_presence_of(:phone)
     end
 
     it "verifies presence of status" do 
-      expect(organization).to \
+      expect(status_org).to \
       validate_presence_of(:status)
     end
 
     it "verifies the presence of primary_name" do
-      expect(organization).to \
+      expect(primary_name_org).to \
       validate_presence_of(:primary_name)
     end
 
     it "verifies presence of secondary_name" do 
-      expect(organization).to \
+      expect(secondary_name_org).to \
       validate_presence_of(:secondary_name)
     end
 
     it "verifies presence of secondary_phone" do
-      expect(organization).to \
+      expect(secondary_phone_org).to \
       validate_presence_of(:secondary_phone)
     end
 
