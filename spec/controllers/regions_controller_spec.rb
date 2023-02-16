@@ -23,9 +23,8 @@ RSpec.describe RegionsController, type: :controller do
     end
 
     describe 'GET #show' do
-      # create a region
+      # create a region to use its ID as a URL param
       let(:region) { create(:region) }
-      # pass its ID in as a param
       it {
         expect(
           get(
@@ -39,9 +38,22 @@ RSpec.describe RegionsController, type: :controller do
   context 'as an authenticated admin' do
     let(:user) { create(:user, :admin) }
     before(:each) { sign_in(user) }
+
     describe 'GET #index' do
       it {
         expect(get(:index)).to be_successful
+      }
+    end
+
+    describe "POST #create" do
+      it {
+        # let(:region) { create(:region) }
+        # post data
+        post(
+          :create,
+          params: { region: attributes_for(:region) })
+        # expect
+        expect(response).to redirect_to regions_path
       }
     end
   end
