@@ -1,7 +1,7 @@
 FactoryBot.define do
     factory :user do
-        email # this will use the sequence
-        password { "secret" }
+        email # uses the sequence below
+        password { "password" }
 
         before(:create) { |user| user.skip_confirmation! }
 
@@ -15,6 +15,10 @@ FactoryBot.define do
         trait :organization_unapproved_user do
             role { :organization }
             organization_id { create(:organization).id }
+        end
+
+        trait :admin do
+          role {:admin}
         end
     end
 end
