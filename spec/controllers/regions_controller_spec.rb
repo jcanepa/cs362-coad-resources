@@ -5,7 +5,6 @@ RSpec.describe RegionsController, type: :controller do
 
   context 'as an unauthenticated user' do
     let(:user) { create(:user) }
-    # if not admin & GET /regions, redirected to dashboard
     describe 'GET #index' do
       it {
         expect(get(:index)).to redirect_to("/users/sign_in")
