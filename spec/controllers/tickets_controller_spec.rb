@@ -7,15 +7,21 @@ RSpec.describe TicketsController, type: :controller do
   let(:organization_approved_user) { create(:user, :organization_approved) }
   let(:organization_unapproved_user) { create(:user, :organization_unapproved) }
 
-  describe 'GET new ticket' do
-    it { expect(get(:new)).to be_successful }
+  context 'as an unauthenticated user' do
+    describe 'GET new ticket' do
+      it { expect(get(:new)).to be_successful }
+    end
   end
 
-  # describe 'GET create ticket' do
-  #   it { expect(get(:create)).to be_successful }
-  # end
+  context 'as an authenticated user' do
+    # describe 'GET create ticket' do
+    #   it { expect(get(:create)).to be_successful }
+    # end
+  end
 
-  # describe 'GET show ticket' do
-  #   it { expect(get(:show)).to be_successful }
-  # end
+  context 'as an authenticated admin user' do
+    # describe 'GET show ticket' do
+    #   it { expect(get(:show)).to be_successful }
+    # end
+  end
 end
