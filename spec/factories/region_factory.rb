@@ -1,3 +1,5 @@
 FactoryBot.define do
-  factory :region do; end
+  factory :region do
+    name { "foo" }
+  end
 end
