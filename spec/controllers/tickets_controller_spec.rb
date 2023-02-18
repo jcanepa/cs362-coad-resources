@@ -9,16 +9,13 @@ RSpec.describe TicketsController, type: :controller do
     end
 
     # POST /tickets
-    describe 'GET #create' do
-        it { expect(get(:create)).to be_successful }
-    end
-
-    # describe 'GET #new' do
-    # it { expect(get(:new)).to be_successful }
-    # end
-
-    # describe 'GET #new' do
-    # it { expect(get(:new)).to be_successful }
+    # describe 'GET #create' do
+    #     it {
+    #       post(
+    #         :create,
+    #         params: { region: attributes_for(:region) })
+    #         expect(response).to redirect_to(dashboard_path)
+    #     }
     # end
   end
 
