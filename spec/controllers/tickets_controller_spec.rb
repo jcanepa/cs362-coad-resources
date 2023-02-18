@@ -9,14 +9,14 @@ RSpec.describe TicketsController, type: :controller do
     end
 
     # POST /tickets
-    # describe 'GET #create' do
-    #     it {
-    #       post(
-    #         :create,
-    #         params: { region: attributes_for(:region) })
-    #         expect(response).to redirect_to(dashboard_path)
-    #     }
-    # end
+    describe 'GET #create' do
+        it {
+          post(
+            :create,
+            params: { region: attributes_for(:region) })
+            expect(response).to redirect_to(dashboard_path)
+        }
+    end
   end
 
   context 'as an authenticated user' do
