@@ -1,9 +1,14 @@
 FactoryBot.define do
     factory :user do
-        email # uses the sequence below
+        email # defaults to factories/sequence
         password { "password" }
 
         before(:create) { |user| user.skip_confirmation! }
+
+        # admin user
+        trait :admin do
+          role {:admin}
+        end
 
         # user with an approved org
         trait :organization_approved_user do
@@ -17,8 +22,5 @@ FactoryBot.define do
             organization_id { create(:organization).id }
         end
 
-        trait :admin do
-          role {:admin}
-        end
     end
 end
