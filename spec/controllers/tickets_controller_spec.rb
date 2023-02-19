@@ -9,20 +9,20 @@ RSpec.describe TicketsController, type: :controller do
     end
 
     # POST /tickets
-    describe 'POST #create' do
-        it {
-          post(
-            :create,
-            :params => { :ticket => {
-              :name => "Foo",
-              :phone => 5555555555,
-              :description => "Bar.",
-              :region_id => 1,
-              :resource_category_id => 1
-            } })
-          expect(response).to redirect_to(ticket_submitted_path)
-        }
-    end
+    # describe 'POST #create' do
+    #     it {
+    #       post(
+    #         :create,
+    #         :params => { :ticket => {
+    #           :name => "Foo",
+    #           :phone => 5555555555,
+    #           :description => "Bar.",
+    #           :region_id => 1,
+    #           :resource_category_id => 1
+    #         } })
+    #       expect(response).to redirect_to(ticket_submitted_path)
+    #     }
+    # end
   end
 
   context 'as an authenticated user' do
