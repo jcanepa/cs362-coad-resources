@@ -9,12 +9,18 @@ RSpec.describe TicketsController, type: :controller do
     end
 
     # POST /tickets
-    describe 'GET #create' do
+    describe 'POST #create' do
         it {
           post(
             :create,
-            params: { region: attributes_for(:region) })
-            expect(response).to redirect_to(dashboard_path)
+            :params => { :ticket => {
+              :name => "Foo",
+              :phone => 5555555555,
+              :description => "Bar.",
+              :region_id => 1,
+              :resource_category_id => 1
+            } })
+          expect(response).to redirect_to(ticket_submitted_path)
         }
     end
   end
