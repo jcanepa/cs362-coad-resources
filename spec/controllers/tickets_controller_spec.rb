@@ -2,10 +2,15 @@ require 'rails_helper'
 
 RSpec.describe TicketsController, type: :controller do
 
-  # Dependencies
   let(:category) { ResourceCategory.create(name: 'Test') }
   let(:region) { create(:region, name: "Foo") }
-  let(:organization) { Organization.create(name: "@", email: "foo@test.com", phone: 5413983298, primary_name: '@', secondary_name: '@', secondary_phone: 5555555555) }
+  let (:ticket) {
+    Ticket.create(
+    name: "Help needed",
+    phone: 5555555555,
+    description: "Emergency request",
+    region_id: region.id,
+    resource_category_id: category.id)}
 
   context 'as an unauthenticated user' do
 
@@ -35,6 +40,15 @@ RSpec.describe TicketsController, type: :controller do
         expect(response).to render_template(:new)
       }
     end
+
+    # # GET /tickets/:id
+    # describe 'GET #show' do
+    #   it {
+    #     get(:show, params: {id: ticket.id})
+    #     expect(response).to redirect_to(dashboard_path)
+    #   }
+    # end
+
   end
 
   context 'as an authenticated user' do
