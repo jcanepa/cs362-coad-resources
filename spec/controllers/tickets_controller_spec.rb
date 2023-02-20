@@ -28,14 +28,13 @@ RSpec.describe TicketsController, type: :controller do
           expect(response).to redirect_to(ticket_submitted_path)
         }
     end
-    # describe "POST #create" do
-    #   it {
-    #     post(
-    #       :create,
-    #       params: { ticket: attributes_for(:ticket) })
-    #     expect(response).to redirect_to(ticket_submitted_path)
-    #   }
-    # end
+
+    describe 'POST #create _templates :new if malformed' do
+    it {
+      post(:create, params: { ticket: { name: nil} })
+      expect(response).to render_template(:new)
+    }
+end
   end
 
   context 'as an authenticated user' do
