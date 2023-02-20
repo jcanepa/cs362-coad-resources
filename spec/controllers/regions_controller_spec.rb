@@ -66,7 +66,7 @@ RSpec.describe RegionsController, type: :controller do
     describe 'PATCH #update' do
       it {
         delete(
-          :update, params: {id: region.id})
+          :destroy, params: {id: region.id})
         expect(response).to redirect_to("/users/sign_in")
       }
     end
@@ -134,7 +134,7 @@ RSpec.describe RegionsController, type: :controller do
     describe 'DELETE #destroy' do
       it {
         delete(
-          :update, params: {id: region.id})
+          :destroy, params: {id: region.id})
         expect(response).to redirect_to(dashboard_path)
       }
     end
@@ -196,14 +196,14 @@ RSpec.describe RegionsController, type: :controller do
       }
     end
 
-    # # DELETE /regions/:id
-    # describe 'DELETE #destroy' do
-    #   it {
-    #     delete(
-    #       :update, params: {id: region.id})
-    #     expect(response).to be_successful
-    #   }
-    # end
+    # DELETE /regions/:id
+    describe 'DELETE #destroy' do
+      it {
+        delete(
+          :destroy, params: {id: region.id, region: attributes_for(:region)})
+        expect(response).to redirect_to(regions_path)
+      }
+    end
   end
 
 end
