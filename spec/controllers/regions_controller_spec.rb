@@ -24,6 +24,13 @@ RSpec.describe RegionsController, type: :controller do
       }
     end
 
+    # GET /regions/new
+    describe 'GET #new' do
+      it {
+        expect(get(:new)) .to redirect_to("/users/sign_in")
+      }
+    end
+
     # POST /regions
     describe "POST #create" do
       it {
@@ -88,4 +95,5 @@ RSpec.describe RegionsController, type: :controller do
       }
     end
   end
+
 end
