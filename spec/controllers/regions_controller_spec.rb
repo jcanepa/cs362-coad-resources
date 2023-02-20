@@ -5,6 +5,7 @@ RSpec.describe RegionsController, type: :controller do
   let(:region) { create(:region) }
 
   context 'as an unauthenticated user' do
+    # all region routes redirect unauthenticated users to login
     let(:user) { create(:user) }
 
     # GET /
@@ -38,6 +39,25 @@ RSpec.describe RegionsController, type: :controller do
           :create,
           params: { region: attributes_for(:region) })
         expect(response).to redirect_to('/users/sign_in')
+      }
+    end
+
+    # GET /regions/:id/edit
+    describe 'GET #edit' do
+      it {
+        expect(
+          get(
+            :edit, params: {id: region.id}))
+        .to redirect_to("/users/sign_in")
+      }
+    end
+
+    # PATCH /regions/:id
+    describe 'PATCH #update' do
+      it {
+        patch(
+          :update, params: {id: region.id})
+        expect(response).to redirect_to("/users/sign_in")
       }
     end
   end
