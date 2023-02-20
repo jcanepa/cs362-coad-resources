@@ -2,12 +2,25 @@ require 'rails_helper'
 
 RSpec.describe RegionsController, type: :controller do
 
+  let(:region) { create(:region) }
+
   context 'as an unauthenticated user' do
     let(:user) { create(:user) }
 
+    # GET /
     describe 'GET #index' do
       it {
         expect(get(:index)).to redirect_to("/users/sign_in")
+      }
+    end
+
+    # GET /regions/:id
+    describe 'GET #show' do
+      it {
+        post(
+          :create,
+          params: { region: attributes_for(:region) })
+        expect(response).to redirect_to('/users/sign_in')
       }
     end
   end
@@ -16,6 +29,7 @@ RSpec.describe RegionsController, type: :controller do
     let(:user) { create(:user) }
     before(:each) { sign_in(user) }
 
+    # GET /
     describe 'GET #index' do
       it {
         expect(get(:index)).to redirect_to(dashboard_path)
@@ -48,6 +62,7 @@ RSpec.describe RegionsController, type: :controller do
     let(:user) { create(:user, :admin) }
     before(:each) { sign_in(user) }
 
+    # GET /
     describe 'GET #index' do
       it {
         expect(get(:index)).to be_successful
