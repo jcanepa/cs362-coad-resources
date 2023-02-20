@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.describe TicketsController, type: :controller do
 
-  let(:ticket) { create(:ticket) }
+  # Dependencies
+  let(:category) { ResourceCategory.create(name: 'Test') }
+  let(:region) { create(:region, name: "Foo") }
+  let(:organization) { Organization.create(name: "@", email: "foo@test.com", phone: 5413983298, primary_name: '@', secondary_name: '@', secondary_phone: 5555555555) }
 
   context 'as an unauthenticated user' do
 
@@ -12,19 +15,27 @@ RSpec.describe TicketsController, type: :controller do
     end
 
     # POST /tickets
-    # describe 'POST #create' do
-    #     it {
-    #       post(
-    #         :create,
-    #         :params => { :ticket => {
-    #           :name => "Foo",
-    #           :phone => 5555555555,
-    #           :description => "Bar.",
-    #           :region_id => 1,
-    #           :resource_category_id => 1
-    #         } })
-    #       expect(response).to redirect_to(ticket_submitted_path)
-    #     }
+    describe 'POST #create' do
+        it {
+          post(
+            :create,
+            params: { ticket: {
+              :name => "Foo",
+              :phone => 5555555555,
+              :description => "Bar.",
+              :region_id => region.id,
+              :resource_category_id => category.id
+            } })
+          expect(response).to redirect_to(ticket_submitted_path)
+        }
+    end
+    # describe "POST #create" do
+    #   it {
+    #     post(
+    #       :create,
+    #       params: { ticket: attributes_for(:ticket) })
+    #     expect(response).to redirect_to(ticket_submitted_path)
+    #   }
     # end
   end
 
