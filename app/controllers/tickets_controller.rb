@@ -28,7 +28,9 @@ class TicketsController < ApplicationController
   end
 
   def show
-    return redirect_to dashboard_path unless current_user&.organization&.approved? || current_user.admin?
+    # TODO:
+    # current_user is nil if not authenticated (non logged-in)
+    return redirect_to dashboard_path unless current_user&.organization&.approved? || current_user&.admin?
     @ticket = Ticket.find(params[:id])
   end
 
