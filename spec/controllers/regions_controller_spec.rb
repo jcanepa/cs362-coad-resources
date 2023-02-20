@@ -60,6 +60,15 @@ RSpec.describe RegionsController, type: :controller do
         expect(response).to redirect_to("/users/sign_in")
       }
     end
+
+    # DELETE /regions/:id
+    describe 'PATCH #update' do
+      it {
+        delete(
+          :update, params: {id: region.id})
+        expect(response).to redirect_to("/users/sign_in")
+      }
+    end
   end
 
   context 'as an authenticated user' do
