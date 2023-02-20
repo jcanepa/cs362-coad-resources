@@ -23,7 +23,6 @@ FactoryBot.define do
         end
 
         trait :no_organization_user do
-
         end
 
         trait :admin do
