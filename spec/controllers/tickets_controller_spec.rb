@@ -22,7 +22,6 @@ RSpec.describe TicketsController, type: :controller do
             params: { ticket: {
               :name => "Foo",
               :phone => 5555555555,
-              :description => "Bar.",
               :region_id => region.id,
               :resource_category_id => category.id
             } })
