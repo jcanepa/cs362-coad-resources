@@ -218,20 +218,18 @@ RSpec.describe OrganizationsController, type: :controller do
     end
   end
 
-  # describe "approve with admin users" do
-  #   let(:organization_approved_user) {create(:user, :organization_approved_user, :admin)}
-  #   before(:each) {sign_in(organization_approved_user)}
-  #   it "approved user" do
-  #     allow_any_instance_of(Organization).to receive(:save).and_return(false)
-  #     organization = create(:organization, status: :submitted)
-  #     organization.reload
-  #     allow(Organization).to receive(:find).and_return(organization)
-  #     expect(post :approve, params: { id: organization.id }).to \
-  #     raise_error(ActionView::MissingTemplate)
-  #     # What it should do
-  #     # redirect_to(organization_path(id: organization.id))
-  #   end
-  # end
+  describe "approve with admin users" do
+    let(:organization_approved_user) {create(:user, :organization_approved_user, :admin)}
+    before(:each) {sign_in(organization_approved_user)}
+    it "approved user" do
+      allow_any_instance_of(Organization).to receive(:save).and_return(false)
+      organization = create(:organization, status: :submitted)
+      organization.reload
+      allow(Organization).to receive(:find).and_return(organization)
+      expect(post :approve, params: { id: organization.id }).to \
+      redirect_to(organization_path(id: organization.id))
+    end
+  end
 
   describe "Checking update with logged in non admin user" do
 
@@ -287,7 +285,7 @@ RSpec.describe OrganizationsController, type: :controller do
     end
   end
 
-  describe "reject" do
+  describe "post reject with admin user" do
     let(:organization_approved_user) {create(:user, :organization_approved_user, :admin)}
     before(:each) {sign_in(organization_approved_user)}
     it "rejects and organization with approved user" do
@@ -296,6 +294,18 @@ RSpec.describe OrganizationsController, type: :controller do
       organization.reload
 
       expect(post :reject, params: { id: organization.id, organization: { rejection_reason: "You suck" } }).to redirect_to(organizations_path)    
+    end
+  end
+
+  describe "reject with admin users" do
+    let(:organization_approved_user) {create(:user, :organization_approved_user, :admin)}
+    before(:each) {sign_in(organization_approved_user)}
+    it "approved user" do
+      allow_any_instance_of(Organization).to receive(:save).and_return(false)
+      organization = create(:organization, status: :submitted)
+      organization.reload
+      allow(Organization).to receive(:find).and_return(organization)
+      expect(post :reject, params: { id: organization.id, organization: { rejection_reason: "You suck" } }).to redirect_to(organization_path(id: organization.id))    
     end
   end
 
