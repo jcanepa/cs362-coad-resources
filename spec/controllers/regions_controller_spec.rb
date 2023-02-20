@@ -177,6 +177,15 @@ RSpec.describe RegionsController, type: :controller do
       }
     end
 
+    describe "POST #create _templates :new if malformed" do
+      it {
+        post(
+          :create,
+          params: { region: {name: nil} })
+        expect(response).to render_template(:new)
+      }
+    end
+
     # GET /regions/:id/edit
     describe 'GET #edit' do
       it {
