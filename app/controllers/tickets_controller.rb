@@ -5,6 +5,7 @@ class TicketsController < ApplicationController
   before_action :authenticate_admin, only: :destroy
 
   def new
+    # show the form
     @ticket = Ticket.new
   end
 
@@ -16,9 +17,12 @@ class TicketsController < ApplicationController
       region_id: params[:ticket][:region_id],
       resource_category_id: params[:ticket][:resource_category_id]
     )
+
     if @ticket.save
+      # success message
       redirect_to ticket_submitted_path
     else
+      # save failed, return to the form
       render :new
     end
   end

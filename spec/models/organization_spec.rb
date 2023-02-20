@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe Organization, type: :model do
  
   let(:organization) {build(:organization)}
