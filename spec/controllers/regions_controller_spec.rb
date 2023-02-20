@@ -10,7 +10,8 @@ RSpec.describe RegionsController, type: :controller do
     # GET /
     describe 'GET #index' do
       it {
-        expect(get(:index)).to redirect_to("/users/sign_in")
+        expect(get(:index))
+        .to redirect_to("/users/sign_in")
       }
     end
 
@@ -18,8 +19,17 @@ RSpec.describe RegionsController, type: :controller do
     describe 'GET #show' do
       it {
         post(
-          :show,
-          params: {id: region.id})
+          :show, params: {id: region.id})
+        expect(response).to redirect_to('/users/sign_in')
+      }
+    end
+
+    # POST /regions
+    describe "POST #create" do
+      it {
+        post(
+          :create,
+          params: { region: attributes_for(:region) })
         expect(response).to redirect_to('/users/sign_in')
       }
     end
