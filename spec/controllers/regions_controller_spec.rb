@@ -205,6 +205,14 @@ RSpec.describe RegionsController, type: :controller do
       }
     end
 
+      describe 'PATCH #update _templates :edit if malformed' do
+      it {
+        patch(
+          :update, params: {id: region.id, region: {name: nil}})
+        expect(response).to render_template(:edit)
+      }
+    end
+
     # DELETE /regions/:id
     describe 'DELETE #destroy' do
       it {

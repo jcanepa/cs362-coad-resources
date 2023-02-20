@@ -2,6 +2,11 @@ require 'rails_helper'
 
 RSpec.describe TicketsController, type: :controller do
 
+  # Dependencies
+  let(:category) { ResourceCategory.create(name: 'Test') }
+  let(:region) { create(:region, name: "Foo") }
+  let(:organization) { Organization.create(name: "@", email: "foo@test.com", phone: 5413983298, primary_name: '@', secondary_name: '@', secondary_phone: 5555555555) }
+
   context 'as an unauthenticated user' do
 
     # GET /tickets/new
@@ -10,20 +15,26 @@ RSpec.describe TicketsController, type: :controller do
     end
 
     # POST /tickets
-    # describe 'POST #create' do
-    #     it {
-    #       post(
-    #         :create,
-    #         :params => { :ticket => {
-    #           :name => "Foo",
-    #           :phone => 5555555555,
-    #           :description => "Bar.",
-    #           :region_id => 1,
-    #           :resource_category_id => 1
-    #         } })
-    #       expect(response).to redirect_to(ticket_submitted_path)
-    #     }
-    # end
+    describe 'POST #create' do
+        it {
+          post(
+            :create,
+            params: { ticket: {
+              :name => "Foo",
+              :phone => 5555555555,
+              :region_id => region.id,
+              :resource_category_id => category.id
+            } })
+          expect(response).to redirect_to(ticket_submitted_path)
+        }
+    end
+
+    describe 'POST #create _templates :new if malformed' do
+    it {
+      post(:create, params: { ticket: { name: nil} })
+      expect(response).to render_template(:new)
+    }
+end
   end
 
   context 'as an authenticated user' do
@@ -45,8 +56,9 @@ RSpec.describe TicketsController, type: :controller do
     # # GET tickets/:id
     # describe 'GET #show' do
     #   it {
-    #     expect(
-    #       get(:show)).to be_successful
+    #     get(
+    #       :show, params: {id: ticket.id})
+    #     expect(response).to be_successful
     #   }
     # end
   end
