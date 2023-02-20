@@ -5,9 +5,9 @@ RSpec.describe RegionsController, type: :controller do
   let(:region) { create(:region) }
 
   context 'as an unauthenticated user' do
-    let(:user) { create(:user) }
-
     # TLDR; all region routes redirect unauthenticated users to login
+
+    let(:user) { create(:user) }
 
     # GET /
     describe 'GET #index' do
@@ -73,6 +73,8 @@ RSpec.describe RegionsController, type: :controller do
   end
 
   context 'as an authenticated user' do
+    # TLDR; all region routes redirect non-admin authenticated users to dashboard
+
     let(:user) { create(:user) }
     before(:each) { sign_in(user) }
 
@@ -149,16 +151,59 @@ RSpec.describe RegionsController, type: :controller do
       }
     end
 
+    # GET /regions/:id
+    describe 'GET #show' do
+      it {
+        post(
+          :show, params: {id: region.id})
+        expect(response).to be_successful
+      }
+    end
+
+    # GET /regions/new
+    describe 'GET #new' do
+      it {
+        expect(get(:new)) .to be_successful
+      }
+    end
+
+    # POST /regions
     describe "POST #create" do
       it {
-        # post data
         post(
           :create,
           params: { region: attributes_for(:region) })
-        # expect
         expect(response).to redirect_to(regions_path)
       }
     end
+
+    # GET /regions/:id/edit
+    describe 'GET #edit' do
+      it {
+        expect(
+          get(
+            :edit, params: {id: region.id}))
+        .to be_successful
+      }
+    end
+
+    # # PATCH /regions/:id
+    # describe 'PATCH #update' do
+    #   it {
+    #     patch(
+    #       :update, params: {id: region.id})
+    #     expect(response).to be_successful
+    #   }
+    # end
+
+    # # DELETE /regions/:id
+    # describe 'PATCH #update' do
+    #   it {
+    #     delete(
+    #       :update, params: {id: region.id})
+    #     expect(response).to be_successful
+    #   }
+    # end
   end
 
 end
