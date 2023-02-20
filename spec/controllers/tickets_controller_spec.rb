@@ -30,11 +30,11 @@ RSpec.describe TicketsController, type: :controller do
     end
 
     describe 'POST #create _templates :new if malformed' do
-    it {
-      post(:create, params: { ticket: { name: nil} })
-      expect(response).to render_template(:new)
-    }
-end
+      it {
+        post(:create, params: { ticket: { name: nil} })
+        expect(response).to render_template(:new)
+      }
+    end
   end
 
   context 'as an authenticated user' do
