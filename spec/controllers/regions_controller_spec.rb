@@ -20,7 +20,7 @@ RSpec.describe RegionsController, type: :controller do
     # GET /regions/:id
     describe 'GET #show' do
       it {
-        post(
+        get(
           :show, params: {id: region.id})
         expect(response).to redirect_to('/users/sign_in')
       }
@@ -88,7 +88,7 @@ RSpec.describe RegionsController, type: :controller do
     # GET /regions/:id
     describe 'GET #show' do
       it {
-        post(
+        get(
           :show, params: {id: region.id})
         expect(response).to redirect_to(dashboard_path)
       }
@@ -154,7 +154,7 @@ RSpec.describe RegionsController, type: :controller do
     # GET /regions/:id
     describe 'GET #show' do
       it {
-        post(
+        get(
           :show, params: {id: region.id})
         expect(response).to be_successful
       }
