@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe TicketsController, type: :controller do
 
+  let(:ticket) { create(:ticket) }
+
   context 'as an unauthenticated user' do
 
     # GET /tickets/new
@@ -45,8 +47,9 @@ RSpec.describe TicketsController, type: :controller do
     # # GET tickets/:id
     # describe 'GET #show' do
     #   it {
-    #     expect(
-    #       get(:show)).to be_successful
+    #     get(
+    #       :show, params: {id: ticket.id})
+    #     expect(response).to be_successful
     #   }
     # end
   end
