@@ -18,8 +18,8 @@ RSpec.describe RegionsController, type: :controller do
     describe 'GET #show' do
       it {
         post(
-          :create,
-          params: { region: attributes_for(:region) })
+          :show,
+          params: {id: region.id})
         expect(response).to redirect_to('/users/sign_in')
       }
     end
@@ -37,8 +37,6 @@ RSpec.describe RegionsController, type: :controller do
     end
 
     describe 'GET #show' do
-      # create a region to use its ID as a URL param
-      let(:region) { create(:region) }
       it {
         expect(
           get(
