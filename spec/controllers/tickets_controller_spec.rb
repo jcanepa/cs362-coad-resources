@@ -82,12 +82,12 @@ RSpec.describe TicketsController, type: :controller do
     before(:each) { sign_in(admin) }
 
     # GET tickets/:id
-    # describe 'GET #show' do
-    #   it {
-    #     get(
-    #       :show, params: {id: ticket.id})
-    #     expect(response).to be_successful
-    #   }
-    # end
+    describe 'GET #show' do
+      it {
+        get(
+          :show, params: {id: ticket.id})
+        expect(response).to be_successful
+      }
+    end
   end
 end
