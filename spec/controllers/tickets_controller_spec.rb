@@ -54,9 +54,11 @@ RSpec.describe TicketsController, type: :controller do
     end
 
     # GET /tickets/:id
-    describe 'GET #show DEBUG' do
+    describe 'GET #show' do
       it {
-        expect(ticket.id).to be > 0
+        get(
+          :show, params: {id: ticket.id})
+        expect(response).to redirect_to(dashboard_path)
       }
     end
 
