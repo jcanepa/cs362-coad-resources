@@ -121,6 +121,14 @@ RSpec.describe TicketsController, type: :controller do
         }
       end
 
+      # PATCH /tickets/:id/close
+      describe 'PATCH #close' do
+        it {
+          patch(:close, params: { id: ticket.id })
+          expect(response). to render_template(:show)
+        }
+      end
+
     end
 
     context 'who is part of an unapproved organization' do
