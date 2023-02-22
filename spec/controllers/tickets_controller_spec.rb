@@ -102,7 +102,7 @@ RSpec.describe TicketsController, type: :controller do
       end
 
       # POST /tickets/:id/release
-      describe 'POST #release' do
+      describe 'POST #release without organization access' do
         it {
           post(:release, params: {id: ticket.id})
           expect(response).to render_template(:show)
@@ -110,7 +110,7 @@ RSpec.describe TicketsController, type: :controller do
       end
 
       # POST /tickets/:id/release
-      describe 'POST #release' do
+      describe 'POST #release with organization access' do
         it {
           organization_approved_user.organization_id = 1
           ticket.organization_id = 1
@@ -122,10 +122,21 @@ RSpec.describe TicketsController, type: :controller do
       end
 
       # PATCH /tickets/:id/close
-      describe 'PATCH #close' do
+      describe 'PATCH #close without organization access' do
         it {
           patch(:close, params: { id: ticket.id })
           expect(response). to render_template(:show)
+        }
+      end
+
+      describe 'PATCH #close with organization access' do
+        it {
+          organization_approved_user.organization_id = 1
+          ticket.organization_id = 1
+          ticket.save
+
+          patch(:close, params: { id: ticket.id })
+          expect(response). to redirect_to(dashboard_path << '#tickets:organization')
         }
       end
 
