@@ -168,7 +168,8 @@ RSpec.describe TicketsController, type: :controller do
       }
     end
 
-    context 'who is part of an approved organization with ticket ownership'
+    context 'who is part of an approved organization with ticket ownership' do
+
       let(:organization_approved_admin) { create(:user, :organization_approved_user, :admin) }
       before(:each) {
         sign_in(organization_approved_admin)
@@ -186,7 +187,7 @@ RSpec.describe TicketsController, type: :controller do
       end
 
       # PATCH /tickets/:id/close
-      describe 'PATCH #close with organization access' do
+      describe 'PATCH #close' do
         it {
           patch(:close, params: { id: ticket.id })
           expect(response). to redirect_to(dashboard_path << '#tickets:open')
