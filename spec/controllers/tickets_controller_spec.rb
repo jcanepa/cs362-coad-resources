@@ -108,6 +108,7 @@ RSpec.describe TicketsController, type: :controller do
           expect(response).to render_template(:show)
         }
       end
+
     end
 
     context 'who is part of an unapproved organization' do
@@ -133,16 +134,23 @@ RSpec.describe TicketsController, type: :controller do
       it {
         get(
           :show, params: {id: ticket.id})
-        expect(response).to be_successful
+          expect(response).to be_successful
+        }
+      end
+
+      # POST /tickets/:id/release
+      describe 'POST #release' do
+        it {
+        organization_approved_admin = create(:user, :organization_approved_user, :admin)
+        sign_in(organization_approved_admin)
+        organization_approved_admin.organization_id = 99
+        ticket.organization_id = 99
+        ticket.save
+
+        post(:release, params: {id: ticket.id})
+        expect(response).to redirect_to(dashboard_path << '#tickets:captured')
       }
     end
 
-    describe 'GET #show returns a given resource' do
-      it {
-        get(
-          :show, params: {id: ticket.id})
-        expect(response).to be_successful
-      }
-    end
   end
 end
