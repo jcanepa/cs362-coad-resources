@@ -59,6 +59,16 @@ RSpec.describe TicketsController, type: :controller do
         get(
           :show, params: {id: ticket.id})
         expect(response).to redirect_to(dashboard_path)
+        # TODO unauthenticated users shouldn't have a dashboard?
+      }
+    end
+
+
+    # POST /tickets/:id/capture
+    describe 'POST #capture' do
+      it {
+        post(:capture, params: {id: ticket.id})
+        expect(response).to redirect_to(dashboard_path)
       }
     end
 
@@ -83,6 +93,14 @@ RSpec.describe TicketsController, type: :controller do
 
     # GET tickets/:id
     describe 'GET #show' do
+      it {
+        get(
+          :show, params: {id: ticket.id})
+        expect(response).to be_successful
+      }
+    end
+
+    describe 'GET #show returns a given resource' do
       it {
         get(
           :show, params: {id: ticket.id})
