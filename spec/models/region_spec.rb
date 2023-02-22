@@ -10,10 +10,13 @@ RSpec.describe Region, type: :model do
   end
 
   describe "attributes" do
-
     it "has a name" do
       expect(region).to respond_to(:name)
     end
+  end
+
+  describe "associations" do
+    it { should have_many(:tickets) }
   end
 
   describe "methods" do
