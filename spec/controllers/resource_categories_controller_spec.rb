@@ -11,10 +11,7 @@ RSpec.describe ResourceCategoriesController, type: :controller do
         end
 
         describe "testing show with unauthenticated user" do
-            it {
-                resources = create(:resource_category, name: "name")
-                expect(get :show, params: {id: resources.id}).to redirect_to("/users/sign_in")
-            }
+            it {expect(get :show, params: {id: resource_category.id}).to redirect_to("/users/sign_in")}
         end
 
         describe "testing new with unauthenticated user" do
@@ -26,25 +23,41 @@ RSpec.describe ResourceCategoriesController, type: :controller do
         end
 
         describe "testing edit with unauthenticated user" do
-            it {
-                resources = create(:resource_category, name: "name")
-                expect(get :edit, params: {id: resources.id}).to redirect_to("/users/sign_in")
-            }
+            it {expect(get :edit, params: {id: resource_category.id}).to redirect_to("/users/sign_in")}
         end
-#
+
         describe "testing update with unauthenticated user" do
             it {
                 patch(
-                    :update, params: {id: resource_category.id, resource_category: attributes_for(:resource_category)})
+                    :update, params: {id: resource_category.id, resource_category: attributes_for(:resource_category)}
+                )
                 expect(response).to redirect_to("/users/sign_in")
             }
         end
-#
 
         describe "testing activate with unauthenticated user" do
             it {
                 patch(
-                    :activate, params: {id: resource_category.id, resource_category: attributes_for(:resource_category)})
+                    :activate, params: {id: resource_category.id, resource_category: attributes_for(:resource_category)}
+                )
+                expect(response).to redirect_to("/users/sign_in")
+            }
+        end
+
+        describe "testing deactivate with unauthenticated user" do
+            it {
+                patch(
+                    :deactivate, params: {id: resource_category.id, resource_category: attributes_for(:resource_category)}
+                )
+                expect(response).to redirect_to("/users/sign_in")
+            }
+        end
+
+        describe "testing destroy with unauthenticated user" do
+            it {
+                delete(
+                    :destroy, params: {id: resource_category.id}
+                )
                 expect(response).to redirect_to("/users/sign_in")
             }
         end
@@ -60,10 +73,7 @@ RSpec.describe ResourceCategoriesController, type: :controller do
         end
 
         describe "testing show with authenticated user" do
-            it {
-                resources = create(:resource_category, name: "name")
-                expect(get :show, params: {id: resources.id}). to redirect_to(dashboard_path)
-            }
+            it {expect(get :show, params: {id: resource_category.id}). to redirect_to(dashboard_path)}
         end
 
         describe "testing new with authenticated user" do
@@ -75,16 +85,14 @@ RSpec.describe ResourceCategoriesController, type: :controller do
         end
 
         describe "testing edit with authenticated user" do
-            it {
-                resources = create(:resource_category, name: "name")
-                expect(get :edit, params: {id: resources.id}).to redirect_to(dashboard_path)
-            }
+            it {expect(get :edit, params: {id: resource_category.id}).to redirect_to(dashboard_path)}
         end
 
         describe "testing update with authenticated user" do
             it {
                 patch(
-                    :update, params: {id: resource_category.id, resource_category: attributes_for(:resource_category)})
+                    :update, params: {id: resource_category.id, resource_category: attributes_for(:resource_category)}
+                )
                 expect(response).to redirect_to(dashboard_path)
             }
         end
@@ -92,7 +100,26 @@ RSpec.describe ResourceCategoriesController, type: :controller do
         describe "testing activate with authenticated user" do
             it {
                 patch(
-                    :activate, params: {id: resource_category.id, resource_category: attributes_for(:resource_category)})
+                    :activate, params: {id: resource_category.id, resource_category: attributes_for(:resource_category)}
+                )
+                expect(response).to redirect_to(dashboard_path)
+            }
+        end
+
+        describe "testing deactivate with authenticated user" do
+            it {
+                patch(
+                    :deactivate, params: {id: resource_category.id, resource_category: attributes_for(:resource_category)}
+                )
+                expect(response).to redirect_to(dashboard_path)
+            }
+        end
+
+        describe "testing destroy with authenticated user" do
+            it {
+                delete(
+                    :destroy, params: {id: resource_category.id}
+                )
                 expect(response).to redirect_to(dashboard_path)
             }
         end
@@ -109,10 +136,7 @@ RSpec.describe ResourceCategoriesController, type: :controller do
         end
 
         describe "testing show with authenticated admin" do        
-            it {
-                resources = create(:resource_category, name: "name")
-                expect(get :show, params: {id: resources.id}).to be_successful
-            }
+            it {expect(get :show, params: {id: resource_category.id}).to be_successful}
         end
 
         describe "testing new with authenticated admin" do
@@ -127,16 +151,14 @@ RSpec.describe ResourceCategoriesController, type: :controller do
         end
 
         describe "testing edit with authenticated admin" do
-            it {
-                resources = create(:resource_category, name: "name")
-                expect(get :edit, params: {id: resources.id}).to be_successful
-            }
+            it {expect(get :edit, params: {id: resource_category.id}).to be_successful}
         end
 
         describe "testing update with authenticated admin" do
             it {
                 patch(
-                    :update, params: {id: resource_category.id, resource_category: attributes_for(:resource_category)})
+                    :update, params: {id: resource_category.id, resource_category: attributes_for(:resource_category)}
+                )
                 expect(response).to redirect_to(resource_category_path)
                 expect(flash[:notice]).to_not be_nil
             }
@@ -147,6 +169,25 @@ RSpec.describe ResourceCategoriesController, type: :controller do
                 patch :activate, params: {id: resource_category.id, resource_category: attributes_for(:resource_category)}
                 expect(response).to redirect_to(resource_category_path)
                 expect(flash[:notice]).to_not be_nil
+            }
+        end
+
+        describe "testing deactivate with authenticated admin" do
+            it {
+                patch(
+                    :deactivate, params: {id: resource_category.id, resource_category: attributes_for(:resource_category)}
+                )
+                expect(response).to redirect_to(resource_category_path)
+                expect(flash[:notice]).to_not be_nil
+            }
+        end
+
+        describe "testing destroy with unauthenticated user" do
+            it {
+                delete(
+                    :destroy, params: {id: resource_category.id}
+                )
+                expect(response).to redirect_to(resource_categories_path)
             }
         end
 
