@@ -150,6 +150,13 @@ RSpec.describe ResourceCategoriesController, type: :controller do
             }
         end
 
+        describe "testing failed create" do
+            it {
+                post :create, params: {resource_category: {name: nil}}
+                expect(response).to render_template(:new)
+            }
+        end
+
         describe "testing edit with authenticated admin" do
             it {expect(get :edit, params: {id: resource_category.id}).to be_successful}
         end
@@ -163,6 +170,15 @@ RSpec.describe ResourceCategoriesController, type: :controller do
                 expect(flash[:notice]).to_not be_nil
             }
         end
+
+        #describe "testing failed update" do
+        #    it {
+        #        resource = create(:resource_category)
+        #        resource.id = nil
+        #        patch :update, params: {id: resource.id}
+        #        expect(response).to render_template(:edit)
+        #    }
+        #end
 
         describe "testing successful activate with authenticated admin" do
             it {
