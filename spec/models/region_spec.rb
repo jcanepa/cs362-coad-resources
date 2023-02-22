@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Region, type: :model do
 
-  let(:region) { create(:region, name: "foo") }
+  let(:region) { create(:region) }
   let(:unspecified_region) { Region.unspecified }
 
   it "exists" do
