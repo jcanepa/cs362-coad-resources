@@ -16,7 +16,7 @@ RSpec.describe Region, type: :model do
   end
 
   describe "associations" do
-    it { should have_many(:tickets) }
+    it { should have_many(:tickets).class_name('Ticket') }
   end
 
   describe "methods" do
