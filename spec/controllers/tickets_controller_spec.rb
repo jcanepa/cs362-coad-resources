@@ -76,6 +76,13 @@ RSpec.describe TicketsController, type: :controller do
   context 'as an authenticated user' do
 
     context 'who is part of an approved organization' do
+      let(:uncaptured_ticket) {
+        create(
+          :ticket,
+          region_id: region.id,
+          resource_category_id: category.id,
+          organization_id: 99)}
+
       let(:organization_approved_user) { create(:user, :organization_approved_user) }
       before(:each) { sign_in(organization_approved_user) }
 
@@ -88,14 +95,16 @@ RSpec.describe TicketsController, type: :controller do
       end
 
       describe 'POST #capture with invalid ID' do
-        let (:uncaptured_ticket) {
-          create(
-            :ticket,
-            region_id: region.id,
-            resource_category_id: category.id,
-            organization_id: 99)}
         it {
           post(:capture, params: {id: uncaptured_ticket.id})
+          expect(response).to render_template(:show)
+        }
+      end
+
+      # POST /tickets/:id/release
+      describe 'POST #release' do
+        it {
+          post(:release, params: {id: ticket.id})
           expect(response).to render_template(:show)
         }
       end
@@ -105,6 +114,13 @@ RSpec.describe TicketsController, type: :controller do
       let(:organization_unapproved_user) { create(:user, :organization_unapproved_user) }
       before(:each) { sign_in(organization_unapproved_user) }
 
+      # POST /tickets/:id/release
+      describe 'POST #release' do
+        it {
+          post(:release, params: {id: ticket.id})
+          expect(response).to redirect_to(dashboard_path)
+        }
+      end
     end
   end
 
