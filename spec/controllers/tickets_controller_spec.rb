@@ -23,7 +23,7 @@ RSpec.describe TicketsController, type: :controller do
           post(
             :create,
             params: { ticket: {
-              :name => "Foo",
+              :name => "foo",
               :phone => 5555555555,
               :region_id => region.id,
               :resource_category_id => category.id
@@ -32,21 +32,7 @@ RSpec.describe TicketsController, type: :controller do
         }
     end
 
-    describe 'POST #create creates new resource' do
-      it {
-        post(
-          :create,
-          params: { ticket: {
-            :name => "Foo",
-            :phone => 5555555555,
-            :region_id => region.id,
-            :resource_category_id => category.id
-          } })
-        expect(response).to redirect_to(ticket_submitted_path)
-      }
-    end
-
-    describe 'POST #create _templates :new if malformed' do
+    describe 'POST #create malformed' do
       it {
         post(:create, params: { ticket: { name: nil} })
         expect(response).to render_template(:new)
