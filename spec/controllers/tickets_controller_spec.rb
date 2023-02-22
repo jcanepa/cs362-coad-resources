@@ -57,6 +57,14 @@ RSpec.describe TicketsController, type: :controller do
       }
     end
 
+    # DELETE /tickets/:id
+    describe 'DELETE #destroy' do
+      it {
+        delete(:destroy, params: {id: ticket.id})
+        expect(response).not_to be_successful
+      }
+    end
+
   end
 
   context 'as an authenticated user' do
@@ -178,6 +186,15 @@ RSpec.describe TicketsController, type: :controller do
           patch(:close, params: { id: ticket.id })
           expect(response). to redirect_to(dashboard_path << '#tickets:open')
         }
+      end
+    end
+
+    # DELETE /tickets/:id
+    describe 'DELETE #destroy' do
+      it {
+        delete(:destroy, params: {id: ticket.id})
+        expect(response).to redirect_to(dashboard_path << '#tickets')
+      }
     end
   end
 end
