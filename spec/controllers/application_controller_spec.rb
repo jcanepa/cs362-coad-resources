@@ -6,7 +6,7 @@ RSpec.describe ApplicationController, type: :controller do
     ac
   end
 
-  # it "responds to after_sign_in_path_for" do
-  #   expect(ac).to respond_to(:after_sign_in_path_for)
-  # end
+  it "responds to after_sign_in_path_for" do
+    expect(ac).to respond_to(:after_sign_in_path_for)
+  end
 end
