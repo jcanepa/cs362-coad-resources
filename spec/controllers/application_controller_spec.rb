@@ -12,10 +12,10 @@ RSpec.describe ApplicationController, type: :controller do
     expect(app_controller).to respond_to(:after_sign_in_path_for)
   end
 
-
-  describe '#after_sign_in_path_for user returns dashboard path' do
+  describe 'method after_sign_in_path_for user returns dashboard path' do
     let(:user) { create(:user) }
 
+    # anonymous controller is a child of class under test
     controller(ApplicationController) do
       def after_sign_up_path_for(resource)
           super resource
