@@ -1,16 +1,30 @@
 require 'rails_helper'
 
 RSpec.describe ApplicationController, type: :controller do
-  let(:ac) { ApplicationController.new }
+
+  let(:app_controller) { ApplicationController.new }
+
   it 'exists' do
-    ac
+    app_controller
   end
 
   it "responds to after_sign_in_path_for" do
-    expect(ac).to respond_to(:after_sign_in_path_for)
+    expect(app_controller).to respond_to(:after_sign_in_path_for)
   end
 
-  it "after_sign_in_path_for returns dashboard path" do
-    expect(ac.after_sign_in_path_for).to eq dashboard_path
+
+  describe '#after_sign_in_path_for user returns dashboard path' do
+    let(:user) { create(:user) }
+
+    controller(ApplicationController) do
+      def after_sign_up_path_for(resource)
+          super resource
+      end
+    end
+
+    it {
+      expect(
+        controller.after_sign_in_path_for(user)).to eq dashboard_path
+    }
   end
 end
