@@ -12,4 +12,22 @@ require 'rails_helper'
 # end
 RSpec.describe DashboardHelper, type: :helper do
 
+  context 'unauthenticated user' do
+  end
+
+  context 'authenticated user' do
+  end
+
+  context 'admin' do
+    # let(:admin) { create(:user, :admin) }
+    let(:admin) { instance_double('User', admin?:true) } # doesn't make a new user, just a fake class that relies on duck typing
+    # let(:org_approved_admin) { instance_doube('User', admin?:true, organization_id: Organization.new().id) }
+
+    describe 'gets the admin dashboard' do
+      it {
+        expect(helper.dashboard_for(admin)).to eq 'admin_dashboard'
+      }
+    end
+  end
+
 end
