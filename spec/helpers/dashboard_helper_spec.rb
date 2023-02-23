@@ -10,6 +10,38 @@ require 'rails_helper'
 #     end
 #   end
 # end
+
 RSpec.describe DashboardHelper, type: :helper do
+
+  context 'unauthenticated user' do
+    let(:user) { create(:user) }
+    describe 'gets the default dashboard' do
+      it {
+        expect(
+          helper.dashboard_for(user))
+          .to eq 'create_application_dashboard'
+      }
+    end
+  end
+
+  context 'authenticated user' do
+    # let(:organizational_user) { instance_double('User', organization_id: Organization.new.id) }
+
+    # describe 'gets the organization submitted dashboard' do
+    #   it {
+    #     expect(helper.dashboard_for(organizational_user)).to eq 'organization_submitted_dashboard'
+    #   }
+    # end
+  end
+
+  context 'admin' do
+    let(:admin) { instance_double('User', admin?: true) }
+
+    describe 'gets the admin dashboard' do
+      it {
+        expect(helper.dashboard_for(admin)).to eq 'admin_dashboard'
+      }
+    end
+  end
 
 end

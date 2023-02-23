@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Region, type: :model do
 
-  let(:region) { create(:region, name: "foo") }
+  let(:region) { create(:region) }
   let(:unspecified_region) { Region.unspecified }
 
   it "exists" do
@@ -10,10 +10,13 @@ RSpec.describe Region, type: :model do
   end
 
   describe "attributes" do
-
     it "has a name" do
       expect(region).to respond_to(:name)
     end
+  end
+
+  describe "associations" do
+    it { should have_many(:tickets).class_name('Ticket') }
   end
 
   describe "methods" do

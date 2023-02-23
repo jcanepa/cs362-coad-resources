@@ -38,6 +38,8 @@ module TicketService
     end
 
     def user_can_capture?(ticket, user)
+      # ticket is not already assigned to an org
+      # AND the user is associated with an approved org
       ticket.organization_id.nil? && user&.organization&.approved?
     end
 
