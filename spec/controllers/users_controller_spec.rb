@@ -9,37 +9,37 @@ RSpec.describe DashboardController, type: :controller do
 
   context 'users confirmations controller' do
     it 'exists' do
-      Users::ConfirmationsController
+      Users::ConfirmationsController.new
     end
   end
 
   context 'users omni auth callbacks controller' do
     it 'exists' do
-      Users::OmniauthCallbacksController
+      Users::OmniauthCallbacksController.new
     end
   end
 
   context 'users passwords controller' do
     it 'exists' do
-      Users::PasswordsController
+      Users::PasswordsController.new
     end
   end
 
   context 'users registrations controller' do
     it 'exists' do
-      Users::RegistrationsController
+      Users::RegistrationsController.new
     end
   end
 
   context 'users sessions controller' do
     it 'exists' do
-      Users::SessionsController
+      Users::SessionsController.new
     end
   end
 
   context 'users unlocks controller' do
     it 'exists' do
-      Users::UnlocksController
+      Users::UnlocksController.new
     end
   end
 
