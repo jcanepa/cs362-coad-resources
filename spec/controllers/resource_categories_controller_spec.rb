@@ -171,20 +171,28 @@ RSpec.describe ResourceCategoriesController, type: :controller do
             }
         end
 
-        #describe "testing failed update" do
-        #    it {
-        #        resource = create(:resource_category)
-        #        resource.id = nil
-        #        patch :update, params: {id: resource.id}
-        #        expect(response).to render_template(:edit)
-        #    }
-        #end
+        describe "testing failed update with authenticated admin" do
+            it {
+                expect_any_instance_of(ResourceCategory).to receive(:save).and_return(false)
+                patch :update, params: {id: resource_category.id, resource_category: attributes_for(:resource_category)}
+                expect(response).to render_template(:edit)
+            }
+        end
 
         describe "testing successful activate with authenticated admin" do
             it {
                 patch :activate, params: {id: resource_category.id, resource_category: attributes_for(:resource_category)}
                 expect(response).to redirect_to(resource_category_path)
                 expect(flash[:notice]).to_not be_nil
+            }
+        end
+
+        describe "testing failed activate with authenticated admin" do
+            it {
+                expect_any_instance_of(ResourceCategory).to receive(:save).and_return(false)
+                patch :activate, params: {id: resource_category.id, resource_category: attributes_for(:resource_category)}
+                #expect(response).to render_template(resource_category_path)
+                expect(flash[:alert]).to_not be_nil
             }
         end
 
@@ -195,6 +203,15 @@ RSpec.describe ResourceCategoriesController, type: :controller do
                 )
                 expect(response).to redirect_to(resource_category_path)
                 expect(flash[:notice]).to_not be_nil
+            }
+        end
+
+        describe "testing failed deactivate with authenticated admin" do
+            it {
+                expect_any_instance_of(ResourceCategory).to receive(:save).and_return(false)
+                patch :deactivate, params: {id: resource_category.id, resource_category: attributes_for(:resource_category)}
+                #expect(response).to render_template(resource_category_path)
+                expect(flash[:alert]).to_not be_nil
             }
         end
 
