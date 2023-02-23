@@ -57,23 +57,25 @@ RSpec.describe OrganizationsController, type: :controller do
     it {expect(post(:create)).to_not be_successful}
   end
 
-  # describe "create with signed in no organization user" do
-  #   let(:no_organization_user) {create(:user, :no_organization_user)}
-  #   let(:organization) {create(:organization)}
-  #   before(:each) {sign_in(no_organization_user)}
+  describe "create with signed in no organization user" do
+    let(:no_organization_user) {create(:user, :no_organization_user)}
+    let(:organization) {create(:organization)}
+    before(:each) {sign_in(no_organization_user)}
 
-  #   it {
-  #     organization = create(:organization, name: 'Old name')
-  #     organization.reload      
-  #     expect(post :create, params: { id: organization.id, organization: { name: "a_brand_new",
-  #                                   status: :approved,
-  #                                   email: "daltons2252@gmail.com",
-  #                                   phone: "555-555-5555",
-  #                                   primary_name: "sup dude",
-  #                                   secondary_name: "second_name",
-  #                                   secondary_phone: "666-666-6666" } }).to \
-  #       redirect_to(organization_application_submitted_path)}
-  # end
+    it {
+      organization = create(:organization, name: 'Old name')
+      organization.reload      
+      expect_any_instance_of(UserMailer).to receive(:new_organization_application).and_return(nil)
+      expect(post :create, params: { id: organization.id, organization: { name: "a_brand_new",
+                                    status: :approved,
+                                    email: "daltons2252@gmail.com",
+                                    phone: "555-555-5555",
+                                    primary_name: "sup dude",
+                                    secondary_name: "second_name",
+                                    secondary_phone: "666-666-6666" } }).to \
+        redirect_to(organization_application_submitted_path)}
+  end
+
   describe "edit with a non signed in approved user" do
     let(:organization_approved_user) {create(:user, :organization_approved_user, :admin)}
     before(:each) {sign_in(organization_approved_user)}
