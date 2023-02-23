@@ -25,13 +25,13 @@ RSpec.describe DashboardHelper, type: :helper do
   end
 
   context 'authenticated user' do
-    # let(:organizational_user) { instance_double('User', organization_id: Organization.new.id) }
+    let(:organizational_user) { instance_double('User', organization_id: Organization.new.id) }
 
-    # describe 'gets the organization submitted dashboard' do
-    #   it {
-    #     expect(helper.dashboard_for(organizational_user)).to eq 'organization_submitted_dashboard'
-    #   }
-    # end
+    describe 'gets the organization submitted dashboard' do
+      it {
+        expect(helper.dashboard_for(organizational_user)).to eq 'organization_submitted_dashboard'
+      }
+    end
   end
 
   context 'admin' do
