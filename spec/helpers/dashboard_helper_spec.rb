@@ -31,6 +31,12 @@ RSpec.describe DashboardHelper, type: :helper do
       expect(helper.dashboard_for(organizational_user))
       .to eq 'organization_submitted_dashboard'
     end
+
+    it 'gets the organization approved dashboard' do
+      o.approve
+      expect(helper.dashboard_for(organizational_user))
+      .to eq 'organization_approved_dashboard'
+    end
   end
 
   context 'admin' do
