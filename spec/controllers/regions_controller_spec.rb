@@ -43,6 +43,18 @@ RSpec.describe RegionsController, type: :controller do
       }
     end
 
+    describe pending "POST #create fails to save resource" do
+      it {
+        # overrides .save method
+        expect_any_instance_of(Region).to receive(:save).and_return(false)
+        post(
+          :create,
+          params: { region: attributes_for(:region) })
+        expect(response).to be_successful
+        expect(response).to render_template(:new)
+      }
+    end
+
     # GET /regions/:id/edit
     describe 'GET #edit' do
       it {

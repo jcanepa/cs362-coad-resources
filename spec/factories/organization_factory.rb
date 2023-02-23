@@ -6,5 +6,7 @@ FactoryBot.define do
     primary_name {"primary_name"}
     secondary_name {"secondary_name"}
     secondary_phone {"666-666-6666"}
+
+    trait 'approved' do; end
   end
 end

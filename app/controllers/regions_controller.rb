@@ -18,8 +18,10 @@ class RegionsController < ApplicationController
   def create
     @region = Region.new(region_params)
     if @region.save
+      # 301 redirect
       redirect_to regions_path, notice: 'Region successfully created.'
     else
+      # 200 success
       render :new
     end
   end
