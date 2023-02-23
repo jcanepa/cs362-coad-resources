@@ -23,11 +23,12 @@ RSpec.describe TicketsController, type: :controller do
           post(
             :create,
             params: { ticket: {
-              :name => "foo",
-              :phone => 5555555555,
+              :name => 'foo',
+              :phone => 5105555555,
+              :description => 'bar',
               :region_id => region.id,
               :resource_category_id => category.id
-            } })
+            }})
           expect(response).to redirect_to(ticket_submitted_path)
         }
     end

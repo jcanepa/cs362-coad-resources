@@ -10,13 +10,7 @@ class TicketsController < ApplicationController
   end
 
   def create
-    @ticket = Ticket.new(
-      name: params[:ticket][:name],
-      phone: format_phone_number(params[:ticket][:phone]),
-      description: params[:ticket][:description],
-      region_id: params[:ticket][:region_id],
-      resource_category_id: params[:ticket][:resource_category_id]
-    )
+    @ticket = Ticket.new(ticket_params)
 
     if @ticket.save
       # success message
