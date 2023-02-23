@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe DashboardController, type: :controller do
+
+  it 'exists' do
+    Class.new { include Dashboard }
+  end
+
   # describe "GET #index while logged in" do
   #   let(:user) { create(:user) }
 
@@ -26,7 +31,7 @@ RSpec.describe DashboardController, type: :controller do
     it { expect(get(:index)).to be_successful}
   end
 
-  describe "not logged in user" do 
+  describe "not logged in user" do
     it{expect(get(:index)).to redirect_to("/users/sign_in")}
   end
 
