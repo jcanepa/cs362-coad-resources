@@ -10,6 +10,7 @@ RSpec.describe 'Approving an organization', type: :feature do
       visit dashboard_path
 
       click_on('Organizations')
+      click_on('Pending')
       click_on('Review')
       click_on('Approve')
 
