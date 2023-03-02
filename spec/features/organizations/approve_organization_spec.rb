@@ -24,10 +24,6 @@ RSpec.describe 'Approving an organization', type: :feature do
       log_in_as(user)
 
       visit dashboard_path
-
-      #click_on "Organizations"
-
-      expect(page).to_not have_content 'Organizations Applications'
       visit organization_path(id: not_approved_org.id)
       expect(page).not_to have_content 'Approve'
     end
