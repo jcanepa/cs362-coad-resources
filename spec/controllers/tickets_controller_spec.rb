@@ -4,7 +4,7 @@ RSpec.describe TicketsController, type: :controller do
 
   let(:category) { create(:resource_category) }
   let(:region) { create(:region) }
-  let (:ticket) {
+  let(:ticket) {
     create(
       :ticket,
       region_id: region.id,
