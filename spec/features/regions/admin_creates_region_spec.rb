@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Creating a Region', type: :feature do
   let(:admin) {create(:user, :admin)}
+  let(:user) {create(:user)}
   it "Creating a Region as an admin user" do
 
     log_in_as(admin)
