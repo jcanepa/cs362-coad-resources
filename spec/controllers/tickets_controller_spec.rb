@@ -65,6 +65,14 @@ RSpec.describe TicketsController, type: :controller do
       }
     end
 
+    # POST /tickets/:id/release
+    describe 'POST #release' do
+        it {
+          post(:release, params: { id: ticket.id })
+          expect(response).to redirect_to(dashboard_path)
+        }
+    end
+
   end
 
   context 'as an authenticated user' do
