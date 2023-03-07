@@ -175,8 +175,7 @@ RSpec.describe TicketsController, type: :controller do
       let(:organization_approved_admin) { create(:user, :organization_approved_user, :admin) }
       before(:each) {
         sign_in(organization_approved_admin)
-        organization_approved_admin.organization_id = 1
-        ticket.organization_id = 1
+        ticket.organization_id = organization_approved_admin.organization_id
         ticket.save
       }
 
