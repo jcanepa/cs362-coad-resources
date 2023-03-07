@@ -133,8 +133,7 @@ RSpec.describe TicketsController, type: :controller do
 
       describe 'PATCH #close with organization access' do
         it {
-          organization_approved_user.organization_id = 1
-          ticket.organization_id = 1
+          ticket.organization_id = organization_approved_user.organization_id
           ticket.save
 
           patch(:close, params: { id: ticket.id })
