@@ -43,6 +43,7 @@ class TicketsController < ApplicationController
 
     if TicketService.release_ticket(params[:id], current_user) == :ok
       if current_user.admin?
+        # TODO: should admins be associated with an organization?
         redirect_to dashboard_path << '#tickets:captured'
       else
         redirect_to dashboard_path << '#tickets:organization'

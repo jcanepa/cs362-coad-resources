@@ -65,6 +65,14 @@ RSpec.describe TicketsController, type: :controller do
       }
     end
 
+    # POST /tickets/:id/release
+    describe 'POST #release' do
+        it {
+          post(:release, params: { id: ticket.id })
+          expect(response).to redirect_to(dashboard_path)
+        }
+    end
+
   end
 
   context 'as an authenticated user' do
@@ -125,8 +133,7 @@ RSpec.describe TicketsController, type: :controller do
 
       describe 'PATCH #close with organization access' do
         it {
-          organization_approved_user.organization_id = 1
-          ticket.organization_id = 1
+          ticket.organization_id = organization_approved_user.organization_id
           ticket.save
 
           patch(:close, params: { id: ticket.id })
@@ -167,8 +174,7 @@ RSpec.describe TicketsController, type: :controller do
       let(:organization_approved_admin) { create(:user, :organization_approved_user, :admin) }
       before(:each) {
         sign_in(organization_approved_admin)
-        organization_approved_admin.organization_id = 1
-        ticket.organization_id = 1
+        ticket.organization_id = organization_approved_admin.organization_id
         ticket.save
       }
 
