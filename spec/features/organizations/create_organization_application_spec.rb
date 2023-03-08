@@ -25,7 +25,17 @@ RSpec.describe 'Creating an Organization Application', type: :feature do
       # select('Option', from: 'Select Box')
 
       choose('organization_liability_insurance_true')
+
+      # consent fields
       choose('organization_agreement_one_true')
+      choose('organization_agreement_two_true')
+      choose('organization_agreement_three_true')
+      choose('organization_agreement_four_true')
+      choose('organization_agreement_five_true')
+      choose('organization_agreement_six_true')
+      choose('organization_agreement_seven_true')
+      choose('organization_agreement_eight_true')
+
       check('organization_resource_category_ids_1')
       fill_in 'organization_primary_name', :with => 'foo'
 
