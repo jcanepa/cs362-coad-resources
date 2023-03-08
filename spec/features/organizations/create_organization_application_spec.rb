@@ -9,24 +9,13 @@ RSpec.describe 'Creating an Organization Application', type: :feature do
 
   describe 'unaffiliated users can submit organization app' do
     it {
+      # go to form
       visit(dashboard_path)
       click_on('Create Application')
       expect(current_path).to eq('/new_organization_application')
 
-      # fill in the form
-
-      # fill_in('First Name', with: 'John')
-      # fill_in('Password', with: 'Seekrit')
-      # fill_in('Description', with: 'Really Long Text...')
-      # choose('A Radio Button')
-      # check('A Checkbox')
-      # uncheck('A Checkbox')
-      # attach_file('Image', '/path/to/image.jpg')
-      # select('Option', from: 'Select Box')
-
+      # complete form
       choose('organization_liability_insurance_true')
-
-      # consent fields
       choose('organization_agreement_one_true')
       choose('organization_agreement_two_true')
       choose('organization_agreement_three_true')
@@ -35,11 +24,21 @@ RSpec.describe 'Creating an Organization Application', type: :feature do
       choose('organization_agreement_six_true')
       choose('organization_agreement_seven_true')
       choose('organization_agreement_eight_true')
-
+      choose('organization_transportation_yes')
       check('organization_resource_category_ids_1')
       fill_in 'organization_primary_name', :with => 'foo'
+      fill_in 'organization_name', :with => 'bar'
+      fill_in 'organization_title', :with => 'baz'
+      fill_in 'organization_phone', :with => '5411234567'
+      fill_in 'organization_secondary_name', :with => 'baz'
+      fill_in 'organization_secondary_phone', :with => 'qux'
+      fill_in 'organization_email', :with => 'quux'
+      fill_in 'organization_description', :with => 'corge'
 
+      # submit form
       click_button('Apply')
+
+
     }
   end
 end
