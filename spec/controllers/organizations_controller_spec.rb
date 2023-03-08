@@ -8,12 +8,11 @@ RSpec.describe OrganizationsController, type: :controller do
     let(:organization_approved_user) { create(:user, :organization_approved_user)}
     let(:organization) {create(:organization)}
     before(:each) {sign_in(organization_approved_user)}
-    it { expect(get(:index)).to be_successful } 
+    it { expect(get(:index)).to be_successful }
   end
 
   describe "index with non signed in user" do
     let(:organization_approved_user) {create(:user, :organization_approved_user)}
-    #let(:organization) {create(:organization)}
     it {expect(get(:index)).to redirect_to("/users/sign_in")}
   end
 
@@ -64,7 +63,7 @@ RSpec.describe OrganizationsController, type: :controller do
 
     it {
       organization = create(:organization, name: 'Old name')
-      organization.reload      
+      organization.reload
       expect_any_instance_of(UserMailer).to receive(:new_organization_application).and_return(nil)
       expect(post :create, params: { id: organization.id, organization: { name: "a_brand_new",
                                     status: :approved,
@@ -93,7 +92,7 @@ RSpec.describe OrganizationsController, type: :controller do
 
     it {
       organization = create(:organization, name: 'Old name')
-      organization.reload      
+      organization.reload
       expect(post :create, params: { id: organization.id, organization: { name: "a_brand_new",
                                     status: :approved,
                                     email: "dalton" } }).to render_template(:new)}
@@ -175,7 +174,7 @@ RSpec.describe OrganizationsController, type: :controller do
     it "approved user" do
       organization = create(:organization)
       organization.reload
-      expect(post :approve, params: { id: organization.id, organization: { 
+      expect(post :approve, params: { id: organization.id, organization: {
         name: "a_brand_new",
         status: :approved,
         email: "daltons2252@gmail.com",
@@ -193,7 +192,7 @@ RSpec.describe OrganizationsController, type: :controller do
     it "approved user" do
       organization = create(:organization)
       organization.reload
-      expect(post :approve, params: { id: organization.id, organization: { 
+      expect(post :approve, params: { id: organization.id, organization: {
         name: "a_brand_new",
         status: :approved,
         email: "daltons2252@gmail.com",
@@ -209,7 +208,7 @@ RSpec.describe OrganizationsController, type: :controller do
     it "approved user" do
       organization = create(:organization)
       organization.reload
-      expect(post :approve, params: { id: organization.id, organization: { 
+      expect(post :approve, params: { id: organization.id, organization: {
         name: "a_brand_new",
         status: :approved,
         email: "daltons2252@gmail.com",
@@ -295,7 +294,7 @@ RSpec.describe OrganizationsController, type: :controller do
       organization = create(:organization, status: :submitted)
       organization.reload
 
-      expect(post :reject, params: { id: organization.id, organization: { rejection_reason: "You suck" } }).to redirect_to(organizations_path)    
+      expect(post :reject, params: { id: organization.id, organization: { rejection_reason: "You suck" } }).to redirect_to(organizations_path)
     end
   end
 
@@ -307,7 +306,7 @@ RSpec.describe OrganizationsController, type: :controller do
       organization = create(:organization, status: :submitted)
       organization.reload
       allow(Organization).to receive(:find).and_return(organization)
-      expect(post :reject, params: { id: organization.id, organization: { rejection_reason: "You suck" } }).to redirect_to(organization_path(id: organization.id))    
+      expect(post :reject, params: { id: organization.id, organization: { rejection_reason: "You suck" } }).to redirect_to(organization_path(id: organization.id))
     end
   end
 
