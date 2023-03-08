@@ -22,6 +22,7 @@ class OrganizationsController < ApplicationController
 
     if @new_organization.save && current_user.save
       redirect_to organization_application_submitted_path
+      # TODO: fails if there are no admin users in the database
       email = UserMailer.with(to: User.where(role: :admin).pluck(:email), new_organization: @new_organization).new_organization_application
       if email then email.deliver_now end
     else

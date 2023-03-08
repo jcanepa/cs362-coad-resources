@@ -5,6 +5,7 @@ RSpec.describe 'Creating an Organization Application', type: :feature do
   before(:each) {
     log_in_as(user)
     create(:resource_category)
+    create(:user, :admin)
   }
 
   describe 'unaffiliated users can submit organization app' do
@@ -31,14 +32,18 @@ RSpec.describe 'Creating an Organization Application', type: :feature do
       fill_in 'organization_title', :with => 'baz'
       fill_in 'organization_phone', :with => '5411234567'
       fill_in 'organization_secondary_name', :with => 'baz'
-      fill_in 'organization_secondary_phone', :with => 'qux'
-      fill_in 'organization_email', :with => 'quux'
+      fill_in 'organization_secondary_phone', :with => '5417654321'
+      fill_in 'organization_email', :with => 'hello@foo.org'
       fill_in 'organization_description', :with => 'corge'
 
       # submit form
       click_button('Apply')
 
+      expect(current_path).to eq('/organization_application_submitted')
+      expect(page).to have_content('Application Submitted')
 
+      click_on('Return To Dashboard')
+      expect(current_path).to eq(dashboard_path)
     }
   end
 end
