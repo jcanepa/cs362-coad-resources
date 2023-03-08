@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Creating an Organization Application', type: :feature do
+
   let(:user) { create(:user) }
   before(:each) {
     log_in_as(user)
@@ -9,6 +10,7 @@ RSpec.describe 'Creating an Organization Application', type: :feature do
   }
 
   describe 'unaffiliated users can submit organization app' do
+
     it {
       # go to form
       visit(dashboard_path)
@@ -27,6 +29,7 @@ RSpec.describe 'Creating an Organization Application', type: :feature do
       choose('organization_agreement_eight_true')
       choose('organization_transportation_yes')
       check('organization_resource_category_ids_1')
+
       fill_in 'organization_primary_name', :with => 'foo'
       fill_in 'organization_name', :with => 'bar'
       fill_in 'organization_title', :with => 'baz'
@@ -39,9 +42,9 @@ RSpec.describe 'Creating an Organization Application', type: :feature do
       # submit form
       click_button('Apply')
 
+      # success page
       expect(current_path).to eq('/organization_application_submitted')
       expect(page).to have_content('Application Submitted')
-
       click_on('Return To Dashboard')
       expect(current_path).to eq(dashboard_path)
     }
