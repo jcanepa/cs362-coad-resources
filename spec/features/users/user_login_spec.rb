@@ -7,7 +7,6 @@ RSpec.describe 'Logging in', type: :feature do
                 email: "email@email.com",
                 password: "password")
 
-            #visit dashboard_path
 
             visit login_path
 
