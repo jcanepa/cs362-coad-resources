@@ -11,5 +11,10 @@ FactoryBot.define do
       organization_id { nil }
     end
 
+    trait :captured do
+      organization_id {create(:organization).id}
+      closed {false}
+    end
+
   end
 end

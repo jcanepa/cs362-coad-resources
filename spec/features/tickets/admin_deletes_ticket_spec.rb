@@ -11,9 +11,8 @@ RSpec.describe 'Deleting a Ticket', type: :feature do
       visit("tickets/#{ticket.id}")
       expect(page).to have_content("Ticket #{ticket.id}")
 
-      accept_alert do
-        click_link('Delete')
-      end
+      click_link('Delete')
+      page.driver.browser.switch_to.alert.accept # accept alert
 
       expect(page).to have_current_path('/dashboard') # should be /dashboard#tickets but capybara doesn't like #anchors
       expect(page).to have_content("Ticket #{ticket.id} was deleted.")
