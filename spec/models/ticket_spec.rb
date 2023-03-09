@@ -4,7 +4,7 @@ RSpec.describe Ticket, type: :model do
 
   # Dependencies
   let(:category) { ResourceCategory.create(name: 'Test') }
-  let(:region) { create(:region, name: "Foo") }
+  let(:region) { create(:region) }
   let(:organization) { Organization.create(name: "@", email: "foo@test.com", phone: 5413983298, primary_name: '@', secondary_name: '@', secondary_phone: 5555555555) }
 
   # Model object

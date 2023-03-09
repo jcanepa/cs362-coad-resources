@@ -47,6 +47,10 @@ RSpec.describe 'Creating an Organization Application', type: :feature do
       expect(page).to have_content('Application Submitted')
       click_on('Return To Dashboard')
       expect(current_path).to eq(dashboard_path)
+
+      # application shows pending status
+      visit(dashboard_path)
+      expect(page).to have_content('Application Pending')
     }
   end
 end
