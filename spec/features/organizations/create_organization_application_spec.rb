@@ -49,7 +49,7 @@ RSpec.describe 'Creating an Organization Application', type: :feature do
       expect(current_path).to eq(dashboard_path)
 
       # application shows pending status
-      visit dashboard_path
+      visit(dashboard_path)
       expect(page).to have_content('Application Pending')
     }
   end
