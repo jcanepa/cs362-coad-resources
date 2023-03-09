@@ -14,7 +14,7 @@ RSpec.describe 'Deleting a Region', type: :feature do
       click_on("Redmond")
       click_on("Delete")
   
-      expect(page).to have_content "Region Redmond was deleted. Associated tickets now belong to the 'Unspecified' region."
+      expect(page).to have_content("Region Redmond was deleted. Associated tickets now belong to the 'Unspecified' region.")
     }
   end
 end
