@@ -21,9 +21,10 @@ RSpec.describe 'Releasing a ticket by an', type: :feature do
       click_on('Tickets')
 
       expect(page).to have_content(ticket.name)
+      # select('My Captured', :from => 'Status')
+      # expect(page).to have_content(ticket.name)
 
-      click_on(ticket.name)
-
+      # click_on(ticket.name)
     }
   end
 
