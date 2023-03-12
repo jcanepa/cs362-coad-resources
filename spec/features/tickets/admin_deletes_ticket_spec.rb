@@ -4,7 +4,7 @@ RSpec.describe 'Deleting a Ticket', type: :feature do
   let(:admin) { create(:user, :admin) }
   let(:ticket) { create(:ticket) }
 
-  describe 'admin user deletes an existing ticket', js: true do
+  describe 'admin user deletes an existing ticket' do
 
     it {
       log_in_as(admin)
@@ -13,11 +13,9 @@ RSpec.describe 'Deleting a Ticket', type: :feature do
 
       click_link('Delete')
 
-      # accepts alert
-      page.driver.browser.switch_to.alert.accept
+      # implicitly accepts alert
 
-      # TODO: should be /dashboard#tickets but capybara doesn't like #anchors
-      expect(page).to have_current_path('/dashboard')
+      expect(page).to have_current_path('/dashboard') # TODO: should be /dashboard#tickets but capybara doesn't like #anchors
       expect(page).to have_content("Ticket #{ticket.id} was deleted.")
     }
   end
