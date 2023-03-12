@@ -3,11 +3,15 @@ require 'rails_helper'
 RSpec.describe 'Releasing a ticket by an', type: :feature do
 
   describe 'organizational user' do
-    let(:user) { create(:user, :organization_approved_user) }
-    let(:ticket) { create(:ticket, :captured_by_organization) }
+    let(:user) { create(:user) }
+    let(:ticket) { create(:ticket, :captured_by_approved_organization) }
 
     it {
+      # user joins the approved organization who captured the ticket
+      user.organization_id = ticket.organization_id
       log_in_as(user)
+      visit(dashboard_path)
+      expect(page).to have_content('Dashboard')
     }
   end
 
