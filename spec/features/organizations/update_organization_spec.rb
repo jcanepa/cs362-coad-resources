@@ -7,10 +7,9 @@ RSpec.describe 'Updating an Organization', type: :feature do
       #organization = create(:organization)
 
       log_in_as(user)
-      
+
       # Navigate to the dashboard path
       visit dashboard_path
-      
 
       # Navigate to the edit organization page
       click_on("Edit Organization")
