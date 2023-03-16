@@ -41,4 +41,52 @@ RSpec.describe DashboardController, type: :controller do
 
     it { expect(get(:index)).to be_successful}
   end
+
+  describe "#get index with admin :status 'Open'" do 
+    let(:user) {create(:user, :admin)}
+    before(:each) {sign_in(user)}
+
+    it {
+      expect(get :index, params: {status: "Open"}).to be_successful
+    }
+  end
+
+  describe "#get index with admin :status 'Closed'" do
+    let(:user) {create(:user, :admin)}
+    before(:each) {sign_in(user)}
+
+    it {
+      expect(get :index, params: {status: "Closed"}).to be_successful
+    }
+  end
+
+  describe "#get index with admin :status 'Captured'" do
+    let(:user) {create(:user, :admin)}
+    before(:each) {sign_in(user)}
+
+    it {
+      expect(get :index, params: {status: "Captured"}).to be_successful
+    }
+  end
+
+  describe "#get index with :status 'My Closed'" do
+    let(:user) {create(:user, :organization_approved_user)}
+    before(:each) {sign_in(user)}
+
+    it {
+      expect(get :index, params: {status: "My Closed"}).to be_successful
+    }
+  end
+
+  describe "#get index with :status 'My Captured'" do
+    let(:user) {create(:user, :organization_approved_user)}
+    before(:each) {sign_in(user)}
+
+    it {
+      expect(get :index, params: {status: "My Captured"}).to be_successful
+    }
+  end
+
+
+
 end

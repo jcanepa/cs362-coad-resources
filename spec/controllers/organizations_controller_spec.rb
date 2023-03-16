@@ -26,7 +26,7 @@ RSpec.describe OrganizationsController, type: :controller do
   end
 
   describe "#get new with signed in user with no organization" do
-    let(:organization_unapproved_user) {create(:user, :no_organization_user)}
+    let(:organization_unapproved_user) {create(:user)}
     before(:each) {sign_in(organization_unapproved_user)}
     it {expect(get(:new)).to be_successful}
   end
@@ -55,7 +55,7 @@ RSpec.describe OrganizationsController, type: :controller do
   end
 
   describe "#post create with signed in no organization user" do
-    let(:no_organization_user) {create(:user, :no_organization_user)}
+    let(:no_organization_user) {create(:user)}
     let(:organization) {create(:organization)}
     before(:each) {sign_in(no_organization_user)}
 
@@ -84,7 +84,7 @@ RSpec.describe OrganizationsController, type: :controller do
   end
 
   describe "#post create with signed in no organization user with inproper organization fields" do
-    let(:no_organization_user) {create(:user, :no_organization_user)}
+    let(:no_organization_user) {create(:user)}
     let(:organization) {create(:organization)}
     before(:each) {sign_in(no_organization_user)}
 
