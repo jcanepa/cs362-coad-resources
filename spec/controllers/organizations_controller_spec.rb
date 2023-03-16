@@ -2,61 +2,59 @@ require 'rails_helper'
 
 RSpec.describe OrganizationsController, type: :controller do
 
-  #before(:each) {sign_in(organization_approved_user)}
-
-  describe "index with signed in approved user" do
+  describe "#get index with signed in approved user" do
     let(:organization_approved_user) { create(:user, :organization_approved_user)}
     let(:organization) {create(:organization)}
     before(:each) {sign_in(organization_approved_user)}
     it { expect(get(:index)).to be_successful }
   end
 
-  describe "index with non signed in user" do
+  describe "#get index with non signed in user" do
     let(:organization_approved_user) {create(:user, :organization_approved_user)}
     it {expect(get(:index)).to redirect_to("/users/sign_in")}
   end
 
-  describe "new with signed in approved user" do
+  describe "#get new with signed in approved user" do
     let(:organization_approved_user) {create(:user, :organization_approved_user)}
     before(:each) {sign_in(organization_approved_user)}
     it {expect(get(:new)).to_not be_successful}
   end
 
-  describe "new with not signed in approved user" do
+  describe "#get new with not signed in approved user" do
     let(:organization_approved_user) {create(:user, :organization_approved_user)}
     it {expect(get(:new)).to_not be_successful}
   end
 
-  describe "new with signed in user with no organization" do
+  describe "#get new with signed in user with no organization" do
     let(:organization_unapproved_user) {create(:user, :no_organization_user)}
     before(:each) {sign_in(organization_unapproved_user)}
     it {expect(get(:new)).to be_successful}
   end
 
-  describe "unnaproved user with an organization" do
+  describe "#get new unnaproved user with an organization" do
     let(:organization_unapproved_user) {create(:user, :organization_unapproved_user)}
     before(:each) {sign_in(organization_unapproved_user)}
     it {expect(get(:new)).to_not be_successful}
   end
 
-  describe "new with approved non signed in user with an organization" do
+  describe "#get new with approved non signed in user with an organization" do
     let(:organization_approved_user) {create(:user, :organization_unapproved_user)}
     it {expect(get(:new)).to_not be_successful}
   end
 
-  describe "create with signed in approved admin user" do
+  describe "#post create with signed in approved admin user" do
     let(:organization_approved_user) {create(:user, :organization_approved_user, :admin)}
     before(:each) {sign_in(organization_approved_user)}
     it {expect(post(:create)).to_not be_successful}
   end
 
-  describe "create with signed in approved non admin user" do
+  describe "#post create with signed in approved non admin user" do
     let(:organization_approved_user) {create(:user, :organization_approved_user)}
     before(:each) {sign_in(organization_approved_user)}
     it {expect(post(:create)).to_not be_successful}
   end
 
-  describe "create with signed in no organization user" do
+  describe "#post create with signed in no organization user" do
     let(:no_organization_user) {create(:user, :no_organization_user)}
     let(:organization) {create(:organization)}
     before(:each) {sign_in(no_organization_user)}
@@ -75,7 +73,7 @@ RSpec.describe OrganizationsController, type: :controller do
         redirect_to(organization_application_submitted_path)}
   end
 
-  describe "edit with a non signed in approved user" do
+  describe "#get edit with a non signed in approved user" do
     let(:organization_approved_user) {create(:user, :organization_approved_user, :admin)}
     before(:each) {sign_in(organization_approved_user)}
 
@@ -85,7 +83,7 @@ RSpec.describe OrganizationsController, type: :controller do
       expect(get :edit, params: { id: organization.id }).to render_template(:edit)}
   end
 
-  describe "create with signed in no organization user with inproper organization fields" do
+  describe "#post create with signed in no organization user with inproper organization fields" do
     let(:no_organization_user) {create(:user, :no_organization_user)}
     let(:organization) {create(:organization)}
     before(:each) {sign_in(no_organization_user)}
@@ -99,7 +97,7 @@ RSpec.describe OrganizationsController, type: :controller do
 
   end
 
-  describe "Checking update with logged in admin user" do
+  describe "#put update with logged in admin user" do
 
     let(:organization_approved_user) { create(:user, :organization_approved_user, :admin)}
     before(:each) {sign_in(organization_approved_user)}
@@ -108,18 +106,19 @@ RSpec.describe OrganizationsController, type: :controller do
       organization.reload
       expect(put :update, params: { id: organization.id, organization: { name: "new_name", status: :approved } }).to redirect_to(organization_path(id: organization.id))
     end
-
+  end
+  
+  describe "#put update with unapproved user" do
     let(:organization_unapproved_user) { create(:user, :organization_unapproved_user, :admin)}
-    before(:each) {sign_in(organization_approved_user)}
+    before(:each) {sign_in(organization_unapproved_user)}
     it 'fails to update an organization' do
       organization = create(:organization, name: 'Old name', status: :approved)
       organization.reload
-      expect(put :update, params: { id: organization.id, organization: { name: "", status: :rejected } }).to render_template(:edit)
+      expect(put :update, params: { id: organization.id, organization: { name: "", status: :rejected } }).to redirect_to(dashboard_path)
     end
-
   end
 
-  describe "a signed in user editing a organization is successful" do
+  describe "#get edit with asigned in user with an approved organization" do
     let(:organization_approved_user) { create(:user, :organization_approved_user)}
     before(:each) {sign_in(organization_approved_user)}
     it "redirects to dashboard path" do
@@ -129,17 +128,16 @@ RSpec.describe OrganizationsController, type: :controller do
     end
   end
 
-  describe "non signed in user " do
+  describe "#get edit with non signed in user " do
     let(:organization_approved_user) { create(:user, :organization_approved_user)}
-    #before(:each) {sign_in(organization_approved_user)}
-    it "redirects to user sign in" do
+    it {
       organization = create(:organization)
       organization.reload
       expect(get :edit, params: {id: organization.id}).to redirect_to("/users/sign_in")
-    end
+    }
   end
 
-  describe "show with an unapproved signed in user " do
+  describe "#get show with an unapproved signed in user " do
     let(:organization_unapproved_user) { create(:user, :organization_unapproved_user)}
     before(:each) {sign_in(organization_unapproved_user)}
     it "redirects to dashboard path" do
@@ -149,29 +147,29 @@ RSpec.describe OrganizationsController, type: :controller do
     end
   end
 
-  describe "show with an unapproved not signed in user " do
+  describe "#get show with an unapproved not signed in user " do
     let(:organization_unapproved_user) { create(:user, :organization_unapproved_user)}
-    it "redirects to dashboard path" do
+    it {
       organization = create(:organization)
       organization.reload
       expect(get :show, params: {id: organization.id}).to redirect_to("/users/sign_in")
-    end
+    }
   end
 
-  describe "show with a admin" do
+  describe "#get show with a admin user" do
     let(:organization_admin_user) {create(:user, :organization_approved_user, :admin)}
     before(:each) {sign_in(organization_admin_user)}
-    it "redirects to dashboard path" do
+    it {
       organization = create(:organization)
       organization.reload
       expect(get :show, params: {id: organization.id}).to render_template(:show)
-    end
+    }
   end
 
-  describe "approve" do
+  describe "#post approve with organization approved user" do
     let(:organization_approved_user) {create(:user, :organization_approved_user, :admin)}
     before(:each) {sign_in(organization_approved_user)}
-    it "approved user" do
+    it {
       organization = create(:organization)
       organization.reload
       expect(post :approve, params: { id: organization.id, organization: {
@@ -183,13 +181,13 @@ RSpec.describe OrganizationsController, type: :controller do
         secondary_name: "second_name",
         secondary_phone: "666-666-6666" } }).to \
         redirect_to(organizations_path)
-    end
+      }
   end
 
-  describe "approve with non-admin users" do
+  describe "#post approve with user with organization approved" do
     let(:organization_approved_user) {create(:user, :organization_approved_user)}
     before(:each) {sign_in(organization_approved_user)}
-    it "approved user" do
+    it {
       organization = create(:organization)
       organization.reload
       expect(post :approve, params: { id: organization.id, organization: {
@@ -200,12 +198,12 @@ RSpec.describe OrganizationsController, type: :controller do
         primary_name: "sup dude",
         secondary_name: "second_name",
         secondary_phone: "666-666-6666" } }).to_not be_successful
-    end
+      }
   end
 
-  describe "approve with non-admin users" do
+  describe "#post approve organization approved user" do
     let(:organization_approved_user) {create(:user, :organization_approved_user)}
-    it "approved user" do
+    it {
       organization = create(:organization)
       organization.reload
       expect(post :approve, params: { id: organization.id, organization: {
@@ -216,33 +214,35 @@ RSpec.describe OrganizationsController, type: :controller do
         primary_name: "sup dude",
         secondary_name: "second_name",
         secondary_phone: "666-666-6666" } }).to redirect_to("/users/sign_in")
-    end
+      }
   end
 
-  describe "approve with admin users" do
+  describe "#post approve with admin users" do
     let(:organization_approved_user) {create(:user, :organization_approved_user, :admin)}
     before(:each) {sign_in(organization_approved_user)}
-    it "approved user" do
+    it {
       allow_any_instance_of(Organization).to receive(:save).and_return(false)
       organization = create(:organization, status: :submitted)
       organization.reload
       allow(Organization).to receive(:find).and_return(organization)
       expect(post :approve, params: { id: organization.id }).to \
       redirect_to(organization_path(id: organization.id))
-    end
+    }
   end
 
-  describe "Checking update with logged in non admin user" do
+  describe "#put update with organization approved user" do
 
     let(:organization_approved_user) { create(:user, :organization_approved_user)}
     before(:each) {sign_in(organization_approved_user)}
-    it 'updates an organization' do
+    it {
       organization = create(:organization, name: 'Old name')
       organization.reload
       expect(put :update, params: { id: organization.id, organization: { name: "new_name", status: :approved } }).to redirect_to(organization_path(id: organization.id))
-    end
+    }
+  end
 
-    let(:organization_unapproved_user) { create(:user, :organization_unapproved_user)}
+  describe "#put update with organization with failed update" do
+    let(:organization_approved_user) { create(:user, :organization_approved_user)}
     before(:each) {sign_in(organization_approved_user)}
     it 'fails to update an organization' do
       organization = create(:organization, name: 'Old name', status: :approved)
@@ -252,7 +252,7 @@ RSpec.describe OrganizationsController, type: :controller do
 
   end
 
-  describe "organization with a user that is not signed in" do
+  describe "#put organization with a user that is not signed in" do
     let(:organization_approved_user) { create(:user, :organization_approved_user)}
     it 'updates an organization' do
       organization = create(:organization, name: 'Old name')
@@ -261,11 +261,11 @@ RSpec.describe OrganizationsController, type: :controller do
     end
   end
 
-  describe "reject" do
+  describe "#post reject with approved user" do
     let(:organization_approved_user) {create(:user, :organization_approved_user)}
     before(:each) {sign_in(organization_approved_user)}
+
     it "rejects and organization with approved user" do
-      #let(:organization) {create(:organization, status: :submitted)}
 
       organization = create(:organization, status: :submitted)
       organization.reload
@@ -274,9 +274,8 @@ RSpec.describe OrganizationsController, type: :controller do
     end
   end
 
-  describe "reject" do
+  describe "#post reject with a not signed in user" do
     let(:organization_unapproved_user) {create(:user, :organization_unapproved_user)}
-    #before(:each) {sign_in(organization_unapproved_user)}
     it "rejects and organization with approved user" do
 
       organization = create(:organization, status: :submitted)
@@ -286,7 +285,7 @@ RSpec.describe OrganizationsController, type: :controller do
     end
   end
 
-  describe "post reject with admin user" do
+  describe "#post reject with admin user" do
     let(:organization_approved_user) {create(:user, :organization_approved_user, :admin)}
     before(:each) {sign_in(organization_approved_user)}
     it "rejects and organization with approved user" do
@@ -298,7 +297,7 @@ RSpec.describe OrganizationsController, type: :controller do
     end
   end
 
-  describe "reject with admin users" do
+  describe "#post reject with admin user" do
     let(:organization_approved_user) {create(:user, :organization_approved_user, :admin)}
     before(:each) {sign_in(organization_approved_user)}
     it "approved user" do
