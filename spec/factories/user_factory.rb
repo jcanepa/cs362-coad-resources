@@ -22,12 +22,5 @@ FactoryBot.define do
             organization_id { create(:organization).id }
         end
 
-        trait :no_organization_user do
-        end
-
-        trait :admin do
-          role {:admin}
-        end
-
     end
 end

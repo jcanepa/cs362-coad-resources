@@ -15,7 +15,7 @@
       .col
         = f.label :password_confirmation, class: 'sr-only'
         = f.password_field :password_confirmation, required: true, placeholder: 'Password confirmation', class: 'form-control'
-    .mb-4.text-center= recaptcha_tags
+    .mb-4.text-center= Rails.env.test? ? nil : recaptcha_tags
     = f.submit 'Sign up', id: 'commit', class: 'btn btn-lg btn-primary btn-block'
   .mt-4
     = surround('Already have an account? Please ', '.') do

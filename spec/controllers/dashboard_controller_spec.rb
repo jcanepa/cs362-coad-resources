@@ -36,7 +36,7 @@ RSpec.describe DashboardController, type: :controller do
   end
 
   describe "no organization user" do
-    let(:no_organization_user) {create(:user, :no_organization_user)}
+    let(:no_organization_user) {create(:user)}
     before(:each) { sign_in(no_organization_user)}
 
     it { expect(get(:index)).to be_successful}

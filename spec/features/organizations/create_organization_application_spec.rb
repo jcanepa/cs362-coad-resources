@@ -29,7 +29,6 @@ RSpec.describe 'Creating an Organization Application', type: :feature do
       choose('organization_agreement_eight_true')
       choose('organization_transportation_yes')
       check('organization_resource_category_ids_1')
-
       fill_in 'organization_primary_name', :with => 'foo'
       fill_in 'organization_name', :with => 'bar'
       fill_in 'organization_title', :with => 'baz'
