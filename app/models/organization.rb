@@ -1,3 +1,8 @@
+# The organizations class represents an organization that either participates, or would like
+# to participate in the Disaster Resource network. An organization my be; approved, submitted,
+# rejected, or locked. The status of the Organization effects how it will be able to interact
+# with the application
+
 class Organization < ApplicationRecord
 
   attr_accessor :agreement_one, :agreement_two, :agreement_three, :agreement_four, :agreement_five, :agreement_six, :agreement_seven, :agreement_eight
