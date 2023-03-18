@@ -1,3 +1,5 @@
+# The Region class represents a region that the Disaster 
+# Resource Network participates in.
 class Region < ApplicationRecord
 
   has_many :tickets
