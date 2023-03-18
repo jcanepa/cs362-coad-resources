@@ -1,4 +1,10 @@
 class Ticket < ApplicationRecord
+  # Tickets are a request for free resources provided by member organizations. Tickets:
+  # are created by a member of the public via form,
+  # are associated with a geographic region,
+  # are classified with a type of resource category
+  # may be claimed by a non-profit organization
+  # can be either open (unaddressed) or closed (request fulfilled).
 
   # Model associations
   belongs_to :region
