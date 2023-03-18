@@ -1,5 +1,5 @@
 class ResourceCategory < ApplicationRecord
-  # Resource category objects classify the types of resources an organization can offer.
+  # Resource categories classify the types of resources an organization offers.
   # Category parity of Organizations and Tickets enforce which submitted tickets organizations can claim.
 
   # Model associations
