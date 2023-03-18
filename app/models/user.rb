@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  # An authenticated user of this Rails app.
 
   enum role: [:admin, :organization]
   after_initialize :set_default_role, :if => :new_record?
